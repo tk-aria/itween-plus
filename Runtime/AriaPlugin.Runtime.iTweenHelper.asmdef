@@ -1,0 +1,11 @@
+{
+    "name": "AriaPlugin.Runtime.iTweenHelper",
+    "references": [
+        "AriaPlugin.Coroutine",
+        "iTween"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
