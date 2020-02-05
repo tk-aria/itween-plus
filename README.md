@@ -1,7 +1,7 @@
 # AriaUnity-iTweenHelper
 
 ## Install
-support unity package manager!!
+support unity package manager.
 
 how to install
 ```manifest.json
