@@ -11,6 +11,5 @@ how to install
 } 
 ```
 
-
 ## License
-- MIT License (iTweenHelper) + ()iTween
+- MIT License (iTweenHelper) + iTween(http://pixelplacement.com/itween/gettingstarted.php)
