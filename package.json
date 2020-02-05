@@ -1,0 +1,22 @@
+{
+    "name": "com.aria.unity.itweenhelper",
+    "version": "1.0.0",
+    "unity": "2019.1",
+    "displayName": "AriaPlugin.iTweenHelper",
+    "description": "explanation",
+    "category": "UI",
+    "keywords": ["UI", "Animation", "Tween"],
+    "dependencies": {
+    },
+    "samples": [
+        {
+            "displayName": "Example",
+            "description": "how to use.",
+            "path": "Samples/Example"
+        }
+    ],
+    "author": {
+      "name": "tkaria",
+      "url": "https://tk3118.hatenablog.com"
+    }
+}
