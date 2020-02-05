@@ -13,4 +13,4 @@ how to install
 
 
 ## License
-- MIT License
+- MIT License (iTweenHelper) + ()iTween
