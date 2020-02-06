@@ -1,11 +1,15 @@
 {
     "name": "AriaPlugin.Runtime.iTweenHelper",
     "references": [
-        "AriaPlugin.Coroutine",
         "iTween"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
-    "allowUnsafeCode": false
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
 }
