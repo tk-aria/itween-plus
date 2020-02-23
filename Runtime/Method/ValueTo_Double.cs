@@ -9,7 +9,11 @@ namespace AriaPlugin.Runtime.iTweenHelper
 
 			from = 0;
 			to = 1;
-			onupdate = "SetDouble";
+			
+			foreach (var param in animationTargetList)
+			{
+				param.onupdate.invokeMethod = "SetDouble";
+			}
 		}
 	}
 }

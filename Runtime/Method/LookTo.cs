@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +8,11 @@ namespace AriaPlugin.Runtime.iTweenHelper
 	/// <summary>
 	///  .
 	/// </summary>
-	public class ValueTo<X> : iTweenBehaviourBase
+	public class LookTo : iTweenBehaviourBase
 	{
 		#region Field
 
-		public X from;
-		public X to;
+        [SerializeField] Transform looktarget = null;
 
 		#endregion // Field End.
 
@@ -21,19 +20,19 @@ namespace AriaPlugin.Runtime.iTweenHelper
 
 		protected override void Initialize()
 		{
-			Register(iTween.ValueTo);
+			Register(iTween.LookTo);
 		}
 
 		protected override Hashtable CreateHash()
 		{
 			Hashtable hash = base.CreateHash();
 			{
-				hash["from"] = from;
-				hash["to"] = to;
+				hash["looktarget"] = looktarget;
 			}
 			return hash;
 		}
 
 		#endregion // Method End.
 	}
-}
+
+} 

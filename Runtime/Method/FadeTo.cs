@@ -6,7 +6,7 @@ using UnityEngine;
 namespace AriaPlugin.Runtime.iTweenHelper
 {
 	/// <summary>
-	///  [ここに何をするクラスなのかを記入する].
+	///  .
 	/// </summary>
 	public class FadeTo : iTweenBehaviourBase
 	{

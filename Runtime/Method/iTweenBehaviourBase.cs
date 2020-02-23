@@ -9,12 +9,19 @@ namespace AriaPlugin.Runtime.iTweenHelper
 	/// <summary>
 	///  iTweenコンポーネント.
 	/// </summary>
-	public abstract class iTweenBehaviourBase : AriaPlugin.Coroutine.EventObject
+	public abstract class iTweenBehaviourBase : Coroutine.EventObject
 	{
+
+		[Serializable]
+		public class AnimationTarget
+		{
+			public GameObject target;
+			public SendMessageParameter onupdate;
+		}
 
 		#region Field
 
-		[SerializeField] protected List<GameObject> animationTargetList;
+		[SerializeField] protected List<AnimationTarget> animationTargetList = new List<AnimationTarget>();
 		[SerializeField] protected bool isAutoStart = true;
 
 		[SerializeField] protected float time = 1f;
@@ -24,9 +31,9 @@ namespace AriaPlugin.Runtime.iTweenHelper
 		[SerializeField] protected iTween.EaseType easeType;
 		[SerializeField] protected iTween.LoopType loopType;
 
-		[SerializeField] protected UnityEvent onStart;
-		[SerializeField] protected UnityEvent onUpdate;
-		[SerializeField] protected UnityEvent onComplete;
+		[SerializeField] protected SendMessageParameter onupdate = new SendMessageParameter();
+		[SerializeField] protected UnityEvent onstart;
+		[SerializeField] protected UnityEvent oncomplete;
 
 		protected Action<GameObject, Hashtable> tweenAction = (target, hash) => { };
 
@@ -46,17 +53,12 @@ namespace AriaPlugin.Runtime.iTweenHelper
 		{
 			Action onStartAction = () =>
 			{
-				onStart.Invoke();
-			};
-
-			Action onUpdateAction = () =>
-			{
-				onUpdate.Invoke();
+				onstart.Invoke();
 			};
 
 			Action onCompleteAction = () =>
 			{
-				onComplete.Invoke();
+				oncomplete.Invoke();
 			};
 
 			return iTween.Hash(
@@ -65,7 +67,6 @@ namespace AriaPlugin.Runtime.iTweenHelper
 				"easetype", easeType,
 				"looptype", loopType,
 				"onstart", onStartAction,
-				"onupdate", onUpdateAction,
 				"oncomplete", onCompleteAction,
 				"ignoretimescale", ignoreTimeScale
 			);
@@ -93,11 +94,21 @@ namespace AriaPlugin.Runtime.iTweenHelper
 		public override IEnumerator OnEventProcess()
 		{
 			var hash = CreateHash();
+			Func<Hashtable, AnimationTarget, Hashtable> addHashAnimationTarget = (Hashtable hashtable, AnimationTarget param) => 
+			{
+				if (param?.onupdate != null)
+				{
+					hashtable["onupdate"] = param.onupdate.invokeMethod;
+					hashtable["onupdatetarget"] = param.onupdate.notifier;
+				}
+				return hashtable;
+			};
+
 			for (int index = 1, max = animationTargetList.Count; index < max; index++)
 			{
-				tweenAction(animationTargetList[index], hash);
+				tweenAction(animationTargetList[index].target, addHashAnimationTarget(hash, animationTargetList[index]));
 			}
-			yield return new WaitForTweenAnimation(animationTargetList[0], hash, tweenAction);
+			yield return new WaitForTweenAnimation(animationTargetList[0].target, addHashAnimationTarget(hash, animationTargetList[0]), tweenAction);
 		}
 
 		/// <summary>
@@ -106,7 +117,14 @@ namespace AriaPlugin.Runtime.iTweenHelper
 		protected virtual void Reset()
 		{
 			animationTargetList.Clear();
-			animationTargetList.Add(this.gameObject);
+			animationTargetList.Add(new AnimationTarget()
+			{
+				target = this.gameObject,
+				onupdate = new SendMessageParameter()
+				{
+					notifier = this.gameObject
+				}
+			});
 		}
 
 		/// <summary>

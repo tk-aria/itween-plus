@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AriaPlugin.Coroutine
+namespace AriaPlugin.Runtime.Coroutine
 {
 	/// <summary>
 	///  [ここに何をするクラスなのかを記入する].
@@ -19,7 +19,7 @@ namespace AriaPlugin.Coroutine
 		#region Field
 
 		private Sequencer sequencer = new Sequencer();
-		[SerializeField] private List<EventObject> objectList;
+		[SerializeField] private List<EventObject> objectList = new List<EventObject>();
 
 		#endregion // Field End.
 

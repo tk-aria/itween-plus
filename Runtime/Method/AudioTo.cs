@@ -6,19 +6,29 @@ using UnityEngine;
 namespace AriaPlugin.Runtime.iTweenHelper
 {
 	/// <summary>
-	///  [ここに何をするクラスなのかを記入する].
+	///  .
 	/// </summary>
 	public class AudioTo : iTweenBehaviourBase
 	{
 		#region Field
 
-		[SerializeField] AudioSource audiosource;
+		[SerializeField] AudioSource audiosource = null;
 		[SerializeField] float volume = 0.5f;
 		[SerializeField] float pitch = 1.0f;
 
 		#endregion // Field End.
 
 		#region Method
+
+		protected override void Reset()
+		{
+			base.Reset();
+			audiosource = gameObject.GetComponent<AudioSource>();
+			if (audiosource == null)
+			{
+				audiosource = gameObject.AddComponent<AudioSource>();
+			}
+		}
 
 		protected override void Initialize()
 		{

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace AriaPlugin.Runtime.iTweenHelper
 {
 	/// <summary>
-	///  [ここに何をするクラスなのかを記入する].
+	///  .
 	/// </summary>
 	public class ScaleTo : iTweenBehaviourBase
 	{
@@ -17,6 +17,12 @@ namespace AriaPlugin.Runtime.iTweenHelper
 		#endregion // Field End.
 
 		#region Method
+
+		protected override void Reset()
+		{
+			base.Reset();
+			scaleTo = transform.localScale; 
+		}
 
 		protected override void Initialize()
 		{
@@ -36,4 +42,22 @@ namespace AriaPlugin.Runtime.iTweenHelper
 
 		#endregion // Method End.
 	}
-}
+
+	#if UNITY_EDITOR
+
+	public static class ScaleToMenu
+	{
+		[UnityEditor.MenuItem("CONTEXT/ScaleTo/Record Scale")]
+		private static void RecordScale(UnityEditor.MenuCommand menuCommand)
+		{
+			var component = menuCommand.context as ScaleTo;
+			if (component == null)
+			{
+				return;
+			}
+			component.scaleTo = component.transform.localScale; 
+		}
+	}
+
+	#endif // UNITY_EDITOR END.
+} 

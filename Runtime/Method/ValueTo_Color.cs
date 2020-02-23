@@ -10,7 +10,11 @@ namespace AriaPlugin.Runtime.iTweenHelper
 
 			from = new Color(0f, 0f, 0f, 0f);
 			to = new Color(1f, 1f, 1f, 1f);
-			onupdate = "SetColor";
+
+			foreach (var param in animationTargetList)
+			{
+				param.onupdate.invokeMethod = "SetColor";
+			}
 		}
 	}
 }

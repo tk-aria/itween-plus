@@ -6,7 +6,7 @@ using UnityEngine.Events;
 namespace AriaPlugin.Runtime.iTweenHelper
 {
 	/// <summary>
-	///  [ここに何をするクラスなのかを記入する].
+	///  .
 	/// </summary>
 	public class MoveTo : iTweenBehaviourBase
 	{
@@ -14,10 +14,19 @@ namespace AriaPlugin.Runtime.iTweenHelper
 
 		public Vector3 target = Vector3.zero;
 		public bool islocal = true;
+		public bool ignoreX = false;
+		public bool ignoreY = false;
+		public bool ignoreZ = false;
 
 		#endregion // Field End.
 
 		#region Method
+
+		protected override void Reset()
+		{
+			base.Reset();
+			target = transform.localPosition; 
+		}
 
 		protected override void Initialize()
 		{
@@ -28,9 +37,9 @@ namespace AriaPlugin.Runtime.iTweenHelper
 		{
 			Hashtable hash = base.CreateHash();
 			{
-				hash["x"] = target.x;
-				hash["y"] = target.y;
-				hash["z"] = target.z;
+				if (!ignoreX) hash["x"] = target.x;
+				if (!ignoreY) hash["y"] = target.y;
+				if (!ignoreZ) hash["z"] = target.z;
 				hash["islocal"] = islocal;
 			}
 			return hash;
@@ -38,5 +47,23 @@ namespace AriaPlugin.Runtime.iTweenHelper
 
 		#endregion // Method End.
 	}
+
+	#if UNITY_EDITOR
+
+	public static class MoveToMenu
+	{
+		[UnityEditor.MenuItem("CONTEXT/MoveTo/Record Position")]
+		private static void RecordPosition(UnityEditor.MenuCommand menuCommand)
+		{
+			var component = menuCommand.context as MoveTo;
+			if (component == null)
+			{
+				return;
+			}
+			component.target = component.transform.localPosition; 
+		}
+	}
+
+	#endif // UNITY_EDITOR END.
 
 }
