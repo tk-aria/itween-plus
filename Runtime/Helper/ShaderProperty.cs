@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace AriaPlugin.Runtime.Common
 {
-    /// <summary>
-    ///  
-    /// </summary>
-    [Serializable]
-    public class ShaderProperty
+	/// <summary>
+	///  
+	/// </summary>
+	[Serializable]
+	public class ShaderProperty
 	{
 		public Material shader = null;
 		public string propertyName = "_Color";
