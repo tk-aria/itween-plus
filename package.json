@@ -2,7 +2,7 @@
     "name": "com.aria.unity.itweenhelper",
     "version": "1.0.0",
     "unity": "2019.1",
-    "displayName": "AriaPlugin.iTweenHelper",
+    "displayName": "iTweenHelper",
     "description": "explanation",
     "category": "UI",
     "keywords": ["UI", "Animation", "Tween"],
