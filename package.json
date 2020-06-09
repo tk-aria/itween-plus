@@ -7,7 +7,6 @@
     "category": "UI",
     "keywords": ["UI", "Animation", "Tween"],
     "dependencies": {
-        "jp.keijiro.klak.timeline.midi": "1.0.3"
     },
     "samples": [
         {
