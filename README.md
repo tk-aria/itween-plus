@@ -7,7 +7,7 @@ how to install
 ```manifest.json
 (manifest.json)
 {
-    "com.aria.unity.itweenhelper": "https://github.com/TK-Aria/iTweenPackage.git" 
+    "com.aria.unity.itween": "https://github.com/TK-Aria/iTweenPackage.git" 
 } 
 ```
 
