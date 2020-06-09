@@ -1,4 +1,4 @@
-# AriaUnity-iTweenHelper
+# iTweenPackage
 
 ## Install
 support unity package manager.
