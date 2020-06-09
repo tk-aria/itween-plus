@@ -39,10 +39,10 @@ using System.Reflection;
 using UnityEngine;
 #endregion
 
-#if UNITY_2019_3_OR_NEWER
+#if UNITY_2019_1_OR_NEWER
 using Tween_UITexture = UnityEngine.UI.Image;
 using Tween_UIText = UnityEngine.UI.Text;
-#else // under 2019.3
+#else // under 2019.1
 using Tween_UITexture = UnityEngine.GUITexture;
 using Tween_UIText = UnityEngine.GUIText;
 #endif // UNITY_VERSION END.
@@ -7487,7 +7487,7 @@ public class iTween : MonoBehaviour
 
 	private static void SetCameraFadeTexture(Texture2D texture)
 	{
-#if UNITY_2019_3_OR_NEWER
+#if UNITY_2019_1_OR_NEWER
 		cameraFade.GetComponent<Tween_UITexture>().material.mainTexture = texture;
 #else // under 2019.3
 		cameraFade.GetComponent<Tween_UITexture>().texture = texture;
