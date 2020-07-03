@@ -7490,7 +7490,7 @@ public sealed class iTween : MonoBehaviour
 	#region Public Helpers
 	
 	/// <summary>
-	///  iTween用のCoroutine.
+	///  Coroutine for iTween.
 	/// </summary>
 	public sealed class WaitForAnimation : CustomYieldInstruction
 	{
@@ -7505,9 +7505,9 @@ public sealed class iTween : MonoBehaviour
 		/// <summary>
 		///  constructor.
 		/// </summary>
-		/// <param name="target">アニメーションするGameObject</param>
-		/// <param name="hashTable">iTweenの設定ハッシュ値</param>
-		/// <param name="tweenAction">iTweenのメソッド</param>
+		/// <param name="target">GameObject for animation target</param>
+		/// <param name="hashTable">iTween hash value</param>
+		/// <param name="tweenAction">method for iTween</param>
 		public WaitForAnimation(Action<GameObject, Hashtable> tweenMethod, GameObject target, Hashtable hashTable)
 		{
 			Action completedAction = () => { m_isAnimation = false;};
