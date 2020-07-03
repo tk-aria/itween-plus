@@ -7518,7 +7518,6 @@ public sealed class iTween : MonoBehaviour
 
 			m_isAnimation = true;
 			hashTable["oncomplete"] = completedAction;
-			hashTable["oncompabsolutecompletelete"] = true;
 
 			tweenMethod.SafeInvoke(target, hashTable);
 		}
