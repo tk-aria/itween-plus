@@ -2,7 +2,7 @@
 
 namespace AriaPlugin.Runtime.iTweenHelper
 {
-	public class ValueTo_Color : ValueTo<Color> 
+	public sealed class ValueTo_Color : ValueTo<Color> 
 	{
 		protected override void Reset()
 		{

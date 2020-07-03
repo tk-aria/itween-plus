@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace AriaPlugin.Runtime.iTweenHelper
 {
-	public class ValueTo_Vector3 : ValueTo<Vector3>
+	public sealed class ValueTo_Vector3 : ValueTo<Vector3>
 	{
 	}
 }

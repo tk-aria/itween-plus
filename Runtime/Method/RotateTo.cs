@@ -8,7 +8,7 @@ namespace AriaPlugin.Runtime.iTweenHelper
 	/// <summary>
 	///  .
 	/// </summary>
-	public class RotateTo : iTweenBehaviourBase
+	public sealed class RotateTo : iTweenBehaviourBase
 	{
 		#region Field
 

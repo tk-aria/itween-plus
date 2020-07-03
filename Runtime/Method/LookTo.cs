@@ -8,11 +8,11 @@ namespace AriaPlugin.Runtime.iTweenHelper
 	/// <summary>
 	///  .
 	/// </summary>
-	public class LookTo : iTweenBehaviourBase
+	public sealed class LookTo : iTweenBehaviourBase
 	{
 		#region Field
 
-        [SerializeField] Transform looktarget = null;
+		[SerializeField] Transform looktarget = null;
 
 		#endregion // Field End.
 

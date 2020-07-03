@@ -1,7 +1,7 @@
 ﻿
 namespace AriaPlugin.Runtime.iTweenHelper
 {
-	public class ValueTo_Float : ValueTo<float> 
+	public sealed class ValueTo_Float : ValueTo<float> 
 	{
 		protected override void Reset()
 		{

@@ -9,6 +9,10 @@ namespace AriaPlugin.Runtime.iTweenHelper
 	/// <summary>
 	///  iTweenコンポーネント.
 	/// </summary>
+	#if UNITY_EDITOR
+	[HelpUrl("http://pixelplacement.com/itween/documentation.php")]
+	#endif // UNITY_EDITOR END.
+	[Il2CppSetOption(Option.NullChecks, false)]
 	public abstract class iTweenBehaviourBase : Coroutine.EventObject
 	{
 

@@ -8,7 +8,7 @@ namespace AriaPlugin.Runtime.iTweenHelper
 	/// <summary>
 	///  .
 	/// </summary>
-	public class MoveTo : iTweenBehaviourBase
+	public sealed class MoveTo : iTweenBehaviourBase
 	{
 		#region Field
 
