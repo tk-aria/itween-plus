@@ -52,9 +52,12 @@ using Tween_UIText = UnityEngine.GUIText;
 /// <para>Author: Bob Berkebile (http://pixelplacement.com)</para>
 /// <para>Support: http://itween.pixelplacement.com</para>
 /// </summary>
-public class iTween : MonoBehaviour 
+#if UNITY_EDITOR
+[HelpUrl("http://pixelplacement.com/itween/documentation.php")]
+#endif // UNITY_EDITOR END.
+public sealed class iTween : MonoBehaviour
 {
-
+	
 	#region Variables
 
 	//repository of all living iTweens:
@@ -6728,7 +6731,7 @@ public class iTween : MonoBehaviour
 	}
 
 	//andeeee from the Unity forum's steller Catmull-Rom class ( http://forum.unity3d.com/viewtopic.php?p=218400#218400 ):
-	private class CRSpline {
+	private sealed class CRSpline {
 		public Vector3[] pts;
 
 		public CRSpline( params Vector3[] pts ) {
@@ -7483,7 +7486,53 @@ public class iTween : MonoBehaviour
 
 	#endregion
 
-	#region Unity Update
+	#region Public Helpers
+	
+	/// <summary>
+	///  iTween用のCoroutine.
+	/// </summary>
+	public sealed class WaitForAnimation : CustomYieldInstruction
+	{
+		#region Field
+
+		private bool m_isAnimation = false;
+
+		#endregion // Field End.
+
+		#region Method
+
+		/// <summary>
+		///  constructor.
+		/// </summary>
+		/// <param name="target">アニメーションするGameObject</param>
+		/// <param name="hashTable">iTweenの設定ハッシュ値</param>
+		/// <param name="tweenAction">iTweenのメソッド</param>
+		public WaitForAnimation(Action<GameObject, Hashtable> tweenMethod, GameObject target, Hashtable hashTable)
+		{
+			Action completedAction = () => { m_isAnimation = false;};
+			if (hashTable.ContainsKey("oncomplete"))
+			{
+			 	completedAction = (Action)hashTable["oncomplete"];
+			}
+
+			m_isAnimation = true;
+			hashTable["oncomplete"] = completedAction;
+			hashTable["oncompabsolutecompletelete"] = true;
+
+			tweenMethod.SafeInvoke(target, hashTable);
+		}
+
+		public override bool keepWaiting 
+		{
+			get { return m_isAnimation; }
+		}
+
+		#endregion // Method End.
+	}
+
+	#endregion // Public Helpers End.
+
+	#region Updated Unity Version
 
 	private static void SetCameraFadeTexture(Texture2D texture)
 	{
@@ -7494,7 +7543,7 @@ public class iTween : MonoBehaviour
 #endif // UNITY VERSION END.
 	}
 
-	#endregion // Unity Update End.
+	#endregion // Updated Unity Version End.
 
 	#region Deprecated and Renamed
 	/*
