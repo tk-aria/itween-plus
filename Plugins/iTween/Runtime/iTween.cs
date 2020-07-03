@@ -7533,7 +7533,7 @@ public sealed class iTween : MonoBehaviour
 
 	#endregion // Public Helpers End.
 
-	#region Updated Unity Version
+	#region Unity Version Update
 
 	private static void SetCameraFadeTexture(Texture2D texture)
 	{
@@ -7544,7 +7544,7 @@ public sealed class iTween : MonoBehaviour
 #endif // UNITY VERSION END.
 	}
 
-	#endregion // Updated Unity Version End.
+	#endregion // Unity Version Update End.
 
 	#region Deprecated and Renamed
 	/*
