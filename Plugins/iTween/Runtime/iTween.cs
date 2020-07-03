@@ -55,9 +55,10 @@ using Tween_UIText = UnityEngine.GUIText;
 #if UNITY_EDITOR
 [HelpUrl("http://pixelplacement.com/itween/documentation.php")]
 #endif // UNITY_EDITOR END.
+[Il2CppSetOption(Option.NullChecks, false)]
 public sealed class iTween : MonoBehaviour
 {
-	
+
 	#region Variables
 
 	//repository of all living iTweens:
