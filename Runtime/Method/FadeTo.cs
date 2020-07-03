@@ -8,7 +8,7 @@ namespace AriaPlugin.Runtime.iTweenHelper
 	/// <summary>
 	///  .
 	/// </summary>
-	public class FadeTo : iTweenBehaviourBase
+	public sealed class FadeTo : iTweenBehaviourBase
 	{
 		#region Field
 

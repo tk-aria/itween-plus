@@ -8,7 +8,7 @@ namespace AriaPlugin.Runtime.iTweenHelper
 	/// <summary>
 	///  .
 	/// </summary>
-	public class AudioTo : iTweenBehaviourBase
+	public sealed class AudioTo : iTweenBehaviourBase
 	{
 		#region Field
 
