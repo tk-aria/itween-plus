@@ -37,7 +37,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-using Unity.IL2CPP.CompilerServices;
+//using Unity.IL2CPP.CompilerServices;
 #endregion
 
 #if UNITY_2019_1_OR_NEWER
@@ -49,14 +49,14 @@ using Tween_UIText = UnityEngine.GUIText;
 #endif // UNITY_VERSION END.
 
 /// <summary>
-/// <para>Version: 2.0.5</para>	 
+/// <para>Version: 2.0.5</para>
 /// <para>Author: Bob Berkebile (http://pixelplacement.com)</para>
 /// <para>Support: http://itween.pixelplacement.com</para>
 /// </summary>
 #if UNITY_EDITOR
 [HelpURL("http://pixelplacement.com/itween/documentation.php")]
 #endif // UNITY_EDITOR END.
-[Il2CppSetOption(Option.NullChecks, false)]
+//[Il2CppSetOption(Option.NullChecks, false)]
 [DisallowMultipleComponent]
 public sealed class iTween : MonoBehaviour
 {
@@ -152,7 +152,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// The type of loop (if any) to use.  
+	/// The type of loop (if any) to use.
 	/// </summary>
 	public enum LoopType {
 		/// <summary>
@@ -170,7 +170,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Many shaders use more than one color. Use can have iTween's Color methods operate on them by name.   
+	/// Many shaders use more than one color. Use can have iTween's Color methods operate on them by name.
 	/// </summary>
 	public enum NamedValueColor {
 		/// <summary>
@@ -196,7 +196,7 @@ public sealed class iTween : MonoBehaviour
 	#region Defaults
 
 	/// <summary>
-	/// A collection of baseline presets that iTween needs and utilizes if certain parameters are not provided. 
+	/// A collection of baseline presets that iTween needs and utilizes if certain parameters are not provided.
 	/// </summary>
 	public static class Defaults {
 		//general defaults:
@@ -267,7 +267,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -280,7 +280,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -288,7 +288,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -338,7 +338,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -351,7 +351,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -359,7 +359,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -372,7 +372,7 @@ public sealed class iTween : MonoBehaviour
 	public static void CameraFadeTo( Hashtable args ) {
 		/*
 		CameraFadeAdd(Defaults.cameraFadeDepth);
-		
+
 		//rescale cameraFade just in case screen size has changed to ensure it takes up the full screen:
 		cameraFade.guiTexture.pixelInset=new Rect(0,0,Screen.width,Screen.height);
 		*/
@@ -390,22 +390,22 @@ public sealed class iTween : MonoBehaviour
 	/// </summary>
 	/// <param name="from">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> or <see cref="Vector3"/> or <see cref="Vector2"/> or <see cref="Color"/> or <see cref="Rect"/> for the starting value.
-	/// </param> 
+	/// </param>
 	/// <param name="to">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> or <see cref="Vector3"/> or <see cref="Vector2"/> or <see cref="Color"/> or <see cref="Rect"/> for the ending value.
-	/// </param> 
+	/// </param>
 	/// <param name="time">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the time in seconds the animation will take to complete.
 	/// </param>
 	/// <param name="speed">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> can be used instead of time to allow animation based on speed (only works with Vector2, Vector3, and Floats)
-	/// </param>	
+	/// </param>
 	/// <param name="delay">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the time in seconds the animation will wait before beginning.
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -418,7 +418,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -426,7 +426,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -472,7 +472,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Changes a GameObject's alpha value instantly then returns it to the provided alpha over time with MINIMUM customization options.  If a GUIText or GUITexture component is attached, it will become the target of the animation. Identical to using ColorFrom and using the "a" parameter. 
+	/// Changes a GameObject's alpha value instantly then returns it to the provided alpha over time with MINIMUM customization options.  If a GUIText or GUITexture component is attached, it will become the target of the animation. Identical to using ColorFrom and using the "a" parameter.
 	/// </summary>
 	/// <param name="target">
 	/// A <see cref="GameObject"/> to be the target of the animation.
@@ -507,7 +507,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -520,7 +520,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -528,7 +528,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -578,7 +578,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -591,7 +591,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -599,7 +599,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -646,10 +646,10 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="a">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the individual setting of the alpha.
-	/// </param> 
+	/// </param>
 	/// <param name="namedcolorvalue">
 	/// A <see cref="NamedColorValue"/> or <see cref="System.String"/> for the individual setting of the alpha.
-	/// </param> 
+	/// </param>
 	/// <param name="includechildren">
 	/// A <see cref="System.Boolean"/> for whether or not to include children of this GameObject. True by default.
 	/// </param>
@@ -661,7 +661,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -674,7 +674,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -682,7 +682,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -804,10 +804,10 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="a">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the individual setting of the alpha.
-	/// </param> 
+	/// </param>
 	/// <param name="namedcolorvalue">
 	/// A <see cref="NamedColorValue"/> or <see cref="System.String"/> for the individual setting of the alpha.
-	/// </param> 
+	/// </param>
 	/// <param name="includechildren">
 	/// A <see cref="System.Boolean"/> for whether or not to include children of this GameObject. True by default.
 	/// </param>
@@ -819,7 +819,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -832,7 +832,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -840,7 +840,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -877,7 +877,7 @@ public sealed class iTween : MonoBehaviour
 	/// <summary>
 	/// Instantly changes an AudioSource's volume and pitch then returns it to it's starting volume and pitch over time with MINIMUM customization options. Default AudioSource attached to GameObject will be used (if one exists) if not supplied.
 	/// </summary>
-	/// <param name="target"> 
+	/// <param name="target">
 	/// A <see cref="GameObject"/> to be the target of the animation which holds the AudioSource to be changed.
 	/// </param>
 	/// <param name="volume"> for the target level of volume.
@@ -894,11 +894,11 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Instantly changes an AudioSource's volume and pitch then returns it to it's starting volume and pitch over time with FULL customization options. Default AudioSource attached to GameObject will be used (if one exists) if not supplied. 
+	/// Instantly changes an AudioSource's volume and pitch then returns it to it's starting volume and pitch over time with FULL customization options. Default AudioSource attached to GameObject will be used (if one exists) if not supplied.
 	/// </summary>
 	/// <param name="audiosource">
 	/// A <see cref="AudioSource"/> for which AudioSource to use.
-	/// </param> 
+	/// </param>
 	/// <param name="volume">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the target level of volume.
 	/// </param>
@@ -913,7 +913,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -926,7 +926,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -934,7 +934,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -997,9 +997,9 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Fades volume and pitch of an AudioSource with MINIMUM customization options.  Default AudioSource attached to GameObject will be used (if one exists) if not supplied. 
+	/// Fades volume and pitch of an AudioSource with MINIMUM customization options.  Default AudioSource attached to GameObject will be used (if one exists) if not supplied.
 	/// </summary>
-	/// <param name="target"> 
+	/// <param name="target">
 	/// A <see cref="GameObject"/> to be the target of the animation which holds the AudioSource to be changed.
 	/// </param>
 	/// <param name="volume"> for the target level of volume.
@@ -1016,11 +1016,11 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Fades volume and pitch of an AudioSource with FULL customization options.  Default AudioSource attached to GameObject will be used (if one exists) if not supplied. 
+	/// Fades volume and pitch of an AudioSource with FULL customization options.  Default AudioSource attached to GameObject will be used (if one exists) if not supplied.
 	/// </summary>
 	/// <param name="audiosource">
 	/// A <see cref="AudioSource"/> for which AudioSource to use.
-	/// </param> 
+	/// </param>
 	/// <param name="volume">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the target level of volume.
 	/// </param>
@@ -1035,7 +1035,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -1048,7 +1048,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -1056,7 +1056,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -1102,10 +1102,10 @@ public sealed class iTween : MonoBehaviour
 	/// </summary>
 	/// <param name="audioclip">
 	/// A <see cref="AudioClip"/> for a reference to the AudioClip to be played.
-	/// </param> 
+	/// </param>
 	/// <param name="audiosource">
 	/// A <see cref="AudioSource"/> for which AudioSource to use
-	/// </param> 
+	/// </param>
 	/// <param name="volume">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the target level of volume.
 	/// </param>
@@ -1124,7 +1124,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -1132,7 +1132,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -1152,7 +1152,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Instantly rotates a GameObject to look at the supplied Vector3 then returns it to it's starting rotation over time with MINIMUM customization options. 
+	/// Instantly rotates a GameObject to look at the supplied Vector3 then returns it to it's starting rotation over time with MINIMUM customization options.
 	/// </summary>
 	/// <param name="target">
 	/// A <see cref="GameObject"/> to be the target of the animation.
@@ -1168,7 +1168,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Instantly rotates a GameObject to look at a supplied Transform or Vector3 then returns it to it's starting rotation over time with FULL customization options. 
+	/// Instantly rotates a GameObject to look at a supplied Transform or Vector3 then returns it to it's starting rotation over time with FULL customization options.
 	/// </summary>
 	/// <param name="looktarget">
 	/// A <see cref="Transform"/> or <see cref="Vector3"/> for a target the GameObject will look at.
@@ -1187,7 +1187,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -1200,7 +1200,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -1208,7 +1208,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -1300,7 +1300,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -1313,7 +1313,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -1321,7 +1321,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -1335,7 +1335,7 @@ public sealed class iTween : MonoBehaviour
 		//clean args:
 		args = iTween.CleanArgs( args );
 
-		//additional property to ensure ConflictCheck can work correctly since Transforms are refrences:		
+		//additional property to ensure ConflictCheck can work correctly since Transforms are refrences:
 		if ( args.Contains( "looktarget" ) ) {
 			if ( args[ "looktarget" ].GetType() == typeof( Transform ) ) {
 				Transform transform = (Transform)args[ "looktarget" ];
@@ -1416,7 +1416,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -1429,7 +1429,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -1437,7 +1437,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -1451,7 +1451,7 @@ public sealed class iTween : MonoBehaviour
 		//clean args:
 		args = iTween.CleanArgs( args );
 
-		//additional property to ensure ConflictCheck can work correctly since Transforms are refrences:		
+		//additional property to ensure ConflictCheck can work correctly since Transforms are refrences:
 		if ( args.Contains( "position" ) ) {
 			if ( args[ "position" ].GetType() == typeof( Transform ) ) {
 				Transform transform = (Transform)args[ "position" ];
@@ -1530,7 +1530,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -1543,7 +1543,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -1551,7 +1551,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -1712,7 +1712,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -1725,7 +1725,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -1733,7 +1733,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -1810,7 +1810,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -1823,7 +1823,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -1831,7 +1831,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -1893,7 +1893,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -1906,7 +1906,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -1914,7 +1914,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -1928,7 +1928,7 @@ public sealed class iTween : MonoBehaviour
 		//clean args:
 		args = iTween.CleanArgs( args );
 
-		//additional property to ensure ConflictCheck can work correctly since Transforms are refrences:		
+		//additional property to ensure ConflictCheck can work correctly since Transforms are refrences:
 		if ( args.Contains( "scale" ) ) {
 			if ( args[ "scale" ].GetType() == typeof( Transform ) ) {
 				Transform transform = (Transform)args[ "scale" ];
@@ -1986,7 +1986,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -1999,7 +1999,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -2007,7 +2007,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -2101,7 +2101,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -2114,7 +2114,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -2122,7 +2122,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -2184,7 +2184,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -2197,7 +2197,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -2205,7 +2205,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -2270,7 +2270,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -2283,7 +2283,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -2291,7 +2291,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -2305,7 +2305,7 @@ public sealed class iTween : MonoBehaviour
 		//clean args:
 		args = iTween.CleanArgs( args );
 
-		//additional property to ensure ConflictCheck can work correctly since Transforms are refrences:		
+		//additional property to ensure ConflictCheck can work correctly since Transforms are refrences:
 		if ( args.Contains( "rotation" ) ) {
 			if ( args[ "rotation" ].GetType() == typeof( Transform ) ) {
 				Transform transform = (Transform)args[ "rotation" ];
@@ -2366,7 +2366,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -2379,7 +2379,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -2387,7 +2387,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -2500,7 +2500,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -2513,7 +2513,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -2521,7 +2521,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -2589,7 +2589,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="easetype">
 	/// A <see cref="EaseType"/> or <see cref="System.String"/> for the shape of the easing curve applied to the animation.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed.
 	/// </param>
@@ -2602,7 +2602,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -2610,7 +2610,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -2678,7 +2678,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="delay">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the time in seconds the animation will wait before beginning.
-	/// </param>  
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed. (only "loop" is allowed with shakes)
 	/// </param>
@@ -2691,7 +2691,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -2699,7 +2699,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -2768,7 +2768,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -2776,7 +2776,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -2829,7 +2829,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="space">
 	/// A <see cref="Space"/> for applying the transformation in either the world coordinate or local cordinate system. Defaults to local space.
-	/// </param> 
+	/// </param>
 	/// <param name="time">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the time in seconds the animation will take to complete.
 	/// </param>
@@ -2848,7 +2848,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -2856,7 +2856,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -2909,7 +2909,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="space">
 	/// A <see cref="Space"/> for applying the transformation in either the world coordinate or local cordinate system. Defaults to local space.
-	/// </param> 
+	/// </param>
 	/// <param name="looktarget">
 	/// A <see cref="Vector3"/> or A <see cref="Transform"/> for a target the GameObject will look at.
 	/// </param>
@@ -2921,7 +2921,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="delay">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the time in seconds the animation will wait before beginning.
-	/// </param>   
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed. (only "loop" is allowed with punches)
 	/// </param>
@@ -2934,7 +2934,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -2942,7 +2942,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -2996,13 +2996,13 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="space">
 	/// A <see cref="Space"/> for applying the transformation in either the world coordinate or local cordinate system. Defaults to local space.
-	/// </param> 
+	/// </param>
 	/// <param name="time">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the time in seconds the animation will take to complete.
 	/// </param>
 	/// <param name="delay">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the time in seconds the animation will wait before beginning.
-	/// </param> 
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed. (only "loop" is allowed with punches)
 	/// </param>
@@ -3015,7 +3015,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -3023,7 +3023,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -3080,7 +3080,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="delay">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the time in seconds the animation will wait before beginning.
-	/// </param> 
+	/// </param>
 	/// <param name="looptype">
 	/// A <see cref="LoopType"/> or <see cref="System.String"/> for the type of loop to apply once the animation has completed. (only "loop" is allowed with punches)
 	/// </param>
@@ -3093,7 +3093,7 @@ public sealed class iTween : MonoBehaviour
 	/// <param name="onstartparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onstart" method.
 	/// </param>
-	/// <param name="onupdate"> 
+	/// <param name="onupdate">
 	/// A <see cref="System.String"/> for the name of a function to launch on every step of the animation.
 	/// </param>
 	/// <param name="onupdatetarget">
@@ -3101,7 +3101,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="onupdateparams">
 	/// A <see cref="System.Object"/> for arguments to be sent to the "onupdate" method.
-	/// </param> 
+	/// </param>
 	/// <param name="oncomplete">
 	/// A <see cref="System.String"/> for the name of a function to launch at the end of the animation.
 	/// </param>
@@ -3353,7 +3353,7 @@ public sealed class iTween : MonoBehaviour
 				colors[ i, 0 ] = GetComponent<Renderer>().materials[ i ].GetColor( namedcolorvalue.ToString() );
 				colors[ i, 1 ] = GetComponent<Renderer>().materials[ i ].GetColor( namedcolorvalue.ToString() );
 			}
-			//colors[0] = colors[1] = renderer.material.color;	
+			//colors[0] = colors[1] = renderer.material.color;
 		} else if ( GetComponent<Light>() ) {
 			colors = new Color[ 1, 3 ];
 			colors[ 0, 0 ] = colors[ 0, 1 ] = GetComponent<Light>().color;
@@ -3547,7 +3547,7 @@ public sealed class iTween : MonoBehaviour
 			}
 		}
 
-		//do we need to plot a path to get to the beginning of the supplied path?		
+		//do we need to plot a path to get to the beginning of the supplied path?
 		bool plotStart;
 		int offset;
 		if ( thisTransform.position != suppliedPath[ 0 ] ) {
@@ -4129,7 +4129,7 @@ public sealed class iTween : MonoBehaviour
 				GetComponent<Renderer>().materials[ i ].SetColor( namedcolorvalue.ToString(), colors[ i, 2 ] );
 			}
 		} else if ( GetComponent<Light>() ) {
-			//light.color=colors[2];	
+			//light.color=colors[2];
 			GetComponent<Light>().color = colors[ 0, 2 ];
 		}
 
@@ -4142,12 +4142,12 @@ public sealed class iTween : MonoBehaviour
 				//guiText.material.color=colors[1];
 				GetComponent<Tween_UIText>().material.color = colors[ 0, 1 ];
 			} else if ( GetComponent<Renderer>() ) {
-				//renderer.material.color=colors[1];	
+				//renderer.material.color=colors[1];
 				for ( int i = 0; i < colors.GetLength( 0 ); i++ ) {
 					GetComponent<Renderer>().materials[ i ].SetColor( namedcolorvalue.ToString(), colors[ i, 1 ] );
 				}
 			} else if ( GetComponent<Light>() ) {
-				//light.color=colors[1];	
+				//light.color=colors[1];
 				GetComponent<Light>().color = colors[ 0, 1 ];
 			}
 		}
@@ -4195,7 +4195,7 @@ public sealed class iTween : MonoBehaviour
 			} else {
 				lookAheadAmount = Defaults.lookAhead;
 			}
-			//tLook = ease(0,1,percentage+lookAheadAmount);			
+			//tLook = ease(0,1,percentage+lookAheadAmount);
 			tLook = ease( 0, 1, Mathf.Min( 1f, percentage + lookAheadAmount ) );
 
 			//locate new leading point with a clamp as stated above:
@@ -4221,7 +4221,7 @@ public sealed class iTween : MonoBehaviour
 		vector3s[ 2 ].y = ease( vector3s[ 0 ].y, vector3s[ 1 ].y, percentage );
 		vector3s[ 2 ].z = ease( vector3s[ 0 ].z, vector3s[ 1 ].z, percentage );
 
-		//apply:	
+		//apply:
 		if ( isLocal ) {
 			thisTransform.localPosition = vector3s[ 2 ];
 		} else {
@@ -4274,7 +4274,7 @@ public sealed class iTween : MonoBehaviour
 
 		/*
 		//dial in:
-		if(percentage==1){	
+		if(percentage==1){
 			transform.position=vector3s[5];
 		}
 		*/
@@ -4405,8 +4405,8 @@ public sealed class iTween : MonoBehaviour
 		vector3s[ 2 ].y = UnityEngine.Random.Range( -vector3s[ 1 ].y * diminishingControl, vector3s[ 1 ].y * diminishingControl );
 		vector3s[ 2 ].z = UnityEngine.Random.Range( -vector3s[ 1 ].z * diminishingControl, vector3s[ 1 ].z * diminishingControl );
 
-		//apply:	
-		//transform.Translate(vector3s[2],space);	
+		//apply:
+		//transform.Translate(vector3s[2],space);
 		if ( isLocal ) {
 			thisTransform.localPosition += vector3s[ 2 ];
 		} else {
@@ -4514,7 +4514,7 @@ public sealed class iTween : MonoBehaviour
 
 		//dial in:
 		/*
-		if(percentage==1){	
+		if(percentage==1){
 			transform.position=vector3s[0];
 		}
 		*/
@@ -4555,7 +4555,7 @@ public sealed class iTween : MonoBehaviour
 
 		//dial in:
 		/*
-		if(percentage==1){	
+		if(percentage==1){
 			transform.eulerAngles=vector3s[0];
 		}
 		*/
@@ -4591,7 +4591,7 @@ public sealed class iTween : MonoBehaviour
 
 		//dial in:
 		/*
-		if(percentage==1){	
+		if(percentage==1){
 			transform.localScale=vector3s[0];
 		}
 		*/
@@ -4782,7 +4782,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Similar to FadeTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options. Does not utilize an EaseType. 
+	/// Similar to FadeTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options. Does not utilize an EaseType.
 	/// </summary>
 	/// <param name="alpha">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the final alpha value of the animation.
@@ -4799,7 +4799,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Similar to FadeTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with MINIMUM customization options. Does not utilize an EaseType. 
+	/// Similar to FadeTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with MINIMUM customization options. Does not utilize an EaseType.
 	/// </summary>
 	/// <param name="target">
 	/// A <see cref="GameObject"/> to be the target of the animation.
@@ -4815,7 +4815,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Similar to ColorTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options. Does not utilize an EaseType. 
+	/// Similar to ColorTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options. Does not utilize an EaseType.
 	/// </summary>
 	/// <param name="color">
 	/// A <see cref="Color"/> to change the GameObject's color to.
@@ -4831,10 +4831,10 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="a">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the individual setting of the alpha.
-	/// </param> 
+	/// </param>
 	/// <param name="namedcolorvalue">
 	/// A <see cref="NamedColorValue"/> or <see cref="System.String"/> for the individual setting of the alpha.
-	/// </param> 
+	/// </param>
 	/// <param name="includechildren">
 	/// A <see cref="System.Boolean"/> for whether or not to include children of this GameObject. True by default.
 	/// </param>
@@ -4926,11 +4926,11 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Similar to AudioTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options. Does not utilize an EaseType. 
+	/// Similar to AudioTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options. Does not utilize an EaseType.
 	/// </summary>
 	/// <param name="audiosource">
 	/// A <see cref="AudioSource"/> for which AudioSource to use.
-	/// </param> 
+	/// </param>
 	/// <param name="volume">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the target level of volume.
 	/// </param>
@@ -4989,7 +4989,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Similar to AudioTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with MINIMUM customization options. Does not utilize an EaseType. 
+	/// Similar to AudioTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with MINIMUM customization options. Does not utilize an EaseType.
 	/// </summary>
 	/// <param name="target">
 	/// A <see cref="GameObject"/> to be the target of the animation.
@@ -5008,7 +5008,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Similar to RotateTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options. Does not utilize an EaseType. 
+	/// Similar to RotateTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options. Does not utilize an EaseType.
 	/// </summary>
 	/// <param name="rotation">
 	/// A <see cref="Transform"/> or <see cref="Vector3"/> for the target Euler angles in degrees to rotate to.
@@ -5027,7 +5027,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="time">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the time in seconds the animation will take to complete.
-	/// </param> 
+	/// </param>
 	public static void RotateUpdate( GameObject target, Hashtable args ) {
 		CleanArgs( args );
 
@@ -5089,7 +5089,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Similar to RotateTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with MINIMUM customization options. Does not utilize an EaseType. 
+	/// Similar to RotateTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with MINIMUM customization options. Does not utilize an EaseType.
 	/// </summary>
 	/// <param name="target">
 	/// A <see cref="GameObject"/> to be the target of the animation.
@@ -5105,7 +5105,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Similar to ScaleTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options.  Does not utilize an EaseType. 
+	/// Similar to ScaleTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options.  Does not utilize an EaseType.
 	/// </summary>
 	/// <param name="scale">
 	/// A <see cref="Transform"/> or <see cref="Vector3"/> for the final scale.
@@ -5121,7 +5121,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="time">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the time in seconds the animation will take to complete.
-	/// </param> 
+	/// </param>
 	public static void ScaleUpdate( GameObject target, Hashtable args ) {
 		CleanArgs( args );
 
@@ -5185,7 +5185,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Similar to MoveTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options. Does not utilize an EaseType. 
+	/// Similar to MoveTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options. Does not utilize an EaseType.
 	/// </summary>
 	/// <param name="position">
 	/// A <see cref="Transform"/> or <see cref="Vector3"/> for a point in space the GameObject will animate to.
@@ -5201,7 +5201,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="time">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the time in seconds the animation will take to complete.
-	/// </param> 
+	/// </param>
 	/// <param name="islocal">
 	/// A <see cref="System.Boolean"/> for whether to animate in world space or relative to the parent. False by default.
 	/// </param>
@@ -5298,7 +5298,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Similar to MoveTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with MINIMUM customization options. Does not utilize an EaseType. 
+	/// Similar to MoveTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with MINIMUM customization options. Does not utilize an EaseType.
 	/// </summary>
 	/// <param name="target">
 	/// A <see cref="GameObject"/> to be the target of the animation.
@@ -5314,7 +5314,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Similar to LookTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options. Does not utilize an EaseType. 
+	/// Similar to LookTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options. Does not utilize an EaseType.
 	/// </summary>
 	/// <param name="looktarget">
 	/// A <see cref="Transform"/> or <see cref="Vector3"/> for a target the GameObject will look at.
@@ -5324,7 +5324,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="time">
 	/// A <see cref="System.Single"/> or <see cref="System.Double"/> for the time in seconds the animation will take to complete.
-	/// </param> 
+	/// </param>
 	public static void LookUpdate( GameObject target, Hashtable args ) {
 		CleanArgs( args );
 
@@ -5395,7 +5395,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Similar to LookTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options. Does not utilize an EaseType. 
+	/// Similar to LookTo but incredibly less expensive for usage inside the Update function or similar looping situations involving a "live" set of changing values with FULL customization options. Does not utilize an EaseType.
 	/// </summary>
 	/// <param name="target">
 	/// A <see cref="GameObject"/> to be the target of the animation.
@@ -5495,7 +5495,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Puts a GameObject on a path at the provided percentage 
+	/// Puts a GameObject on a path at the provided percentage
 	/// </summary>
 	/// <param name="target">
 	/// A <see cref="GameObject"/>
@@ -5511,7 +5511,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Puts a GameObject on a path at the provided percentage 
+	/// Puts a GameObject on a path at the provided percentage
 	/// </summary>
 	/// <param name="target">
 	/// A <see cref="Transform"/>
@@ -5527,7 +5527,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Puts a GameObject on a path at the provided percentage 
+	/// Puts a GameObject on a path at the provided percentage
 	/// </summary>
 	/// <param name="target">
 	/// A <see cref="GameObject"/>
@@ -5548,7 +5548,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Puts a GameObject on a path at the provided percentage 
+	/// Puts a GameObject on a path at the provided percentage
 	/// </summary>
 	/// <param name="target">
 	/// A <see cref="Transform"/>
@@ -5569,7 +5569,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Returns a Vector3 position on a path at the provided percentage  
+	/// Returns a Vector3 position on a path at the provided percentage
 	/// </summary>
 	/// <param name="path">
 	/// A <see cref="Transform[]"/>
@@ -5609,7 +5609,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="color">
 	/// A <see cref="Color"/>
-	/// </param> 
+	/// </param>
 	public static void DrawLine( Vector3[] line, Color color ) {
 		if ( line.Length > 0 ) {
 			DrawLineHelper( line, color, "gizmos" );
@@ -5641,7 +5641,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="color">
 	/// A <see cref="Color"/>
-	/// </param> 
+	/// </param>
 	public static void DrawLine( Transform[] line, Color color ) {
 		if ( line.Length > 0 ) {
 			//create and store line points:
@@ -5674,7 +5674,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="color">
 	/// A <see cref="Color"/>
-	/// </param> 
+	/// </param>
 	public static void DrawLineGizmos( Vector3[] line, Color color ) {
 		if ( line.Length > 0 ) {
 			DrawLineHelper( line, color, "gizmos" );
@@ -5706,7 +5706,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="color">
 	/// A <see cref="Color"/>
-	/// </param> 
+	/// </param>
 	public static void DrawLineGizmos( Transform[] line, Color color ) {
 		if ( line.Length > 0 ) {
 			//create and store line points:
@@ -5739,7 +5739,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="color">
 	/// A <see cref="Color"/>
-	/// </param> 
+	/// </param>
 	public static void DrawLineHandles( Vector3[] line, Color color ) {
 		if ( line.Length > 0 ) {
 			DrawLineHelper( line, color, "handles" );
@@ -5771,7 +5771,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="color">
 	/// A <see cref="Color"/>
-	/// </param> 
+	/// </param>
 	public static void DrawLineHandles( Transform[] line, Color color ) {
 		if ( line.Length > 0 ) {
 			//create and store line points:
@@ -5785,7 +5785,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Returns a Vector3 position on a path at the provided percentage  
+	/// Returns a Vector3 position on a path at the provided percentage
 	/// </summary>
 	/// <param name="path">
 	/// A <see cref="Vector3[]"/>
@@ -5820,7 +5820,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="color">
 	/// A <see cref="Color"/>
-	/// </param> 
+	/// </param>
 	public static void DrawPath( Vector3[] path, Color color ) {
 		if ( path.Length > 0 ) {
 			DrawPathHelper( path, color, "gizmos" );
@@ -5853,7 +5853,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="color">
 	/// A <see cref="Color"/>
-	/// </param> 
+	/// </param>
 	public static void DrawPath( Transform[] path, Color color ) {
 		if ( path.Length > 0 ) {
 			//create and store path points:
@@ -5886,7 +5886,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="color">
 	/// A <see cref="Color"/>
-	/// </param> 
+	/// </param>
 	public static void DrawPathGizmos( Vector3[] path, Color color ) {
 		if ( path.Length > 0 ) {
 			DrawPathHelper( path, color, "gizmos" );
@@ -5919,7 +5919,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="color">
 	/// A <see cref="Color"/>
-	/// </param> 
+	/// </param>
 	public static void DrawPathGizmos( Transform[] path, Color color ) {
 		if ( path.Length > 0 ) {
 			//create and store path points:
@@ -5952,7 +5952,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="color">
 	/// A <see cref="Color"/>
-	/// </param> 
+	/// </param>
 	public static void DrawPathHandles( Vector3[] path, Color color ) {
 		if ( path.Length > 0 ) {
 			DrawPathHelper( path, color, "handles" );
@@ -5985,7 +5985,7 @@ public sealed class iTween : MonoBehaviour
 	/// </param>
 	/// <param name="color">
 	/// A <see cref="Color"/>
-	/// </param> 
+	/// </param>
 	public static void DrawPathHandles( Transform[] path, Color color ) {
 		if ( path.Length > 0 ) {
 			//create and store path points:
@@ -6102,8 +6102,8 @@ public sealed class iTween : MonoBehaviour
 
 
 	//#################################
-	//# RESUME UTILITIES AND OVERLOADS # 
-	//#################################	
+	//# RESUME UTILITIES AND OVERLOADS #
+	//#################################
 
 	/// <summary>
 	/// Resume all iTweens on a GameObject.
@@ -6132,7 +6132,7 @@ public sealed class iTween : MonoBehaviour
 	/// </summar
 	/// <param name="type">
 	/// A <see cref="System.String"/> name of the type of iTween you would like to resume.  Can be written as part of a name such as "mov" for all "MoveTo" iTweens.
-	/// </param>	
+	/// </param>
 	public static void Resume( GameObject target, string type ) {
 		Component[] tweens = target.GetComponents<iTween>();
 		foreach ( iTween item in tweens ) {
@@ -6149,7 +6149,7 @@ public sealed class iTween : MonoBehaviour
 	/// </summar
 	/// <param name="type">
 	/// A <see cref="System.String"/> name of the type of iTween you would like to resume.  Can be written as part of a name such as "mov" for all "MoveTo" iTweens.
-	/// </param>	
+	/// </param>
 	public static void Resume( GameObject target, string type, bool includechildren ) {
 		Component[] tweens = target.GetComponents<iTween>();
 		foreach ( iTween item in tweens ) {
@@ -6182,7 +6182,7 @@ public sealed class iTween : MonoBehaviour
 	/// </summary>
 	/// <param name="type">
 	/// A <see cref="System.String"/> name of the type of iTween you would like to resume.  Can be written as part of a name such as "mov" for all "MoveTo" iTweens.
-	/// </param> 
+	/// </param>
 	public static void Resume( string type ) {
 		ArrayList resumeArray = new ArrayList();
 
@@ -6198,7 +6198,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	//#################################
-	//# PAUSE UTILITIES AND OVERLOADS # 
+	//# PAUSE UTILITIES AND OVERLOADS #
 	//#################################
 
 	/// <summary>
@@ -6233,7 +6233,7 @@ public sealed class iTween : MonoBehaviour
 	/// </summar
 	/// <param name="type">
 	/// A <see cref="System.String"/> name of the type of iTween you would like to pause.  Can be written as part of a name such as "mov" for all "MoveTo" iTweens.
-	/// </param>	
+	/// </param>
 	public static void Pause( GameObject target, string type ) {
 		Component[] tweens = target.GetComponents<iTween>();
 		foreach ( iTween item in tweens ) {
@@ -6255,7 +6255,7 @@ public sealed class iTween : MonoBehaviour
 	/// </summar
 	/// <param name="type">
 	/// A <see cref="System.String"/> name of the type of iTween you would like to pause.  Can be written as part of a name such as "mov" for all "MoveTo" iTweens.
-	/// </param>	
+	/// </param>
 	public static void Pause( GameObject target, string type, bool includechildren ) {
 		Component[] tweens = target.GetComponents<iTween>();
 		foreach ( iTween item in tweens ) {
@@ -6293,7 +6293,7 @@ public sealed class iTween : MonoBehaviour
 	/// </summary>
 	/// <param name="type">
 	/// A <see cref="System.String"/> name of the type of iTween you would like to pause.  Can be written as part of a name such as "mov" for all "MoveTo" iTweens.
-	/// </param> 
+	/// </param>
 	public static void Pause( string type ) {
 		ArrayList pauseArray = new ArrayList();
 
@@ -6309,8 +6309,8 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	//#################################
-	//# COUNT UTILITIES AND OVERLOADS # 
-	//#################################	
+	//# COUNT UTILITIES AND OVERLOADS #
+	//#################################
 
 	/// <summary>
 	/// Count all iTweens in current scene.
@@ -6324,7 +6324,7 @@ public sealed class iTween : MonoBehaviour
 	/// </summary>
 	/// <param name="type">
 	/// A <see cref="System.String"/> name of the type of iTween you would like to stop.  Can be written as part of a name such as "mov" for all "MoveTo" iTweens.
-	/// </param> 
+	/// </param>
 	public static int Count( string type ) {
 		int tweenCount = 0;
 
@@ -6353,7 +6353,7 @@ public sealed class iTween : MonoBehaviour
 	/// </summary>
 	/// <param name="type">
 	/// A <see cref="System.String"/> name of the type of iTween you would like to count.  Can be written as part of a name such as "mov" for all "MoveTo" iTweens.
-	/// </param>  
+	/// </param>
 	public static int Count( GameObject target, string type ) {
 		int tweenCount = 0;
 		Component[] tweens = target.GetComponents<iTween>();
@@ -6368,8 +6368,8 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	//################################
-	//# STOP UTILITIES AND OVERLOADS # 
-	//################################	
+	//# STOP UTILITIES AND OVERLOADS #
+	//################################
 
 	/// <summary>
 	/// Stop and destroy all Tweens in current scene.
@@ -6388,7 +6388,7 @@ public sealed class iTween : MonoBehaviour
 	/// </summary>
 	/// <param name="type">
 	/// A <see cref="System.String"/> name of the type of iTween you would like to stop.  Can be written as part of a name such as "mov" for all "MoveTo" iTweens.
-	/// </param> 
+	/// </param>
 	public static void Stop( string type ) {
 		ArrayList stopArray = new ArrayList();
 
@@ -6409,7 +6409,7 @@ public sealed class iTween : MonoBehaviour
 	/// </summary>
 	/// <param name="name">
 	/// The <see cref="System.String"/> name of iTween you would like to stop.
-	/// </param> 
+	/// </param>
 	public static void StopByName( string name ) {
 		ArrayList stopArray = new ArrayList();
 
@@ -6452,7 +6452,7 @@ public sealed class iTween : MonoBehaviour
 	/// </summar
 	/// <param name="type">
 	/// A <see cref="System.String"/> name of the type of iTween you would like to stop.  Can be written as part of a name such as "mov" for all "MoveTo" iTweens.
-	/// </param>	
+	/// </param>
 	public static void Stop( GameObject target, string type ) {
 		Component[] tweens = target.GetComponents<iTween>();
 		foreach ( iTween item in tweens ) {
@@ -6470,7 +6470,7 @@ public sealed class iTween : MonoBehaviour
 	/// </summar
 	/// <param name="name">
 	/// The <see cref="System.String"/> name of iTween you would like to stop.
-	/// </param>	
+	/// </param>
 	public static void StopByName( GameObject target, string name ) {
 		Component[] tweens = target.GetComponents<iTween>();
 		foreach ( iTween item in tweens ) {
@@ -6491,7 +6491,7 @@ public sealed class iTween : MonoBehaviour
 	/// </summar
 	/// <param name="type">
 	/// A <see cref="System.String"/> name of the type of iTween you would like to stop.  Can be written as part of a name such as "mov" for all "MoveTo" iTweens.
-	/// </param>	
+	/// </param>
 	public static void Stop( GameObject target, string type, bool includechildren ) {
 		Component[] tweens = target.GetComponents<iTween>();
 		foreach ( iTween item in tweens ) {
@@ -6514,7 +6514,7 @@ public sealed class iTween : MonoBehaviour
 	/// </summar
 	/// <param name="name">
 	/// The <see cref="System.String"/> name of iTween you would like to stop.
-	/// </param>	
+	/// </param>
 	public static void StopByName( GameObject target, string name, bool includechildren ) {
 		Component[] tweens = target.GetComponents<iTween>();
 		foreach ( iTween item in tweens ) {
@@ -6620,7 +6620,7 @@ public sealed class iTween : MonoBehaviour
 			}
 		}
 		Debug.Log("Complete");
-	
+
 		TweenComplete();
 	}
 
@@ -7116,7 +7116,7 @@ public sealed class iTween : MonoBehaviour
 	//calculate percentage of tween based on time:
 	void UpdatePercentage() {
 
-		// Added by PressPlay   
+		// Added by PressPlay
 		if ( useRealTime ) {
 			runningTime += ( Time.realtimeSinceStartup - lastRealTime );
 		} else {
@@ -7191,7 +7191,7 @@ public sealed class iTween : MonoBehaviour
 		Destroy( this );
 	}
 
-	void ConflictCheck() {//if a new iTween is about to run and is of the same type as an in progress iTween this will destroy the previous if the new one is NOT identical in every way or it will destroy the new iTween if they are:	
+	void ConflictCheck() {//if a new iTween is about to run and is of the same type as an in progress iTween this will destroy the previous if the new one is NOT identical in every way or it will destroy the new iTween if they are:
 		Component[] tweens = GetComponents<iTween>();
 		foreach ( iTween item in tweens ) {
 			if ( item.type == "value" ) {
@@ -7214,7 +7214,7 @@ public sealed class iTween : MonoBehaviour
 						item.Dispose();
 						return;
 					} else {
-						if ( !item.tweenArguments[ currentProp.Key ].Equals( tweenArguments[ currentProp.Key ] ) && (string)currentProp.Key != "id" ) {//if we aren't comparing ids and something isn't exactly the same replace the running iTween: 
+						if ( !item.tweenArguments[ currentProp.Key ].Equals( tweenArguments[ currentProp.Key ] ) && (string)currentProp.Key != "id" ) {//if we aren't comparing ids and something isn't exactly the same replace the running iTween:
 							item.Dispose();
 							return;
 						}
@@ -7223,7 +7223,7 @@ public sealed class iTween : MonoBehaviour
 
 				//step 3: prevent a new iTween addition if it is identical to the currently running iTween
 				Dispose();
-				//Destroy(this);	
+				//Destroy(this);
 			}
 		}
 	}
@@ -7563,7 +7563,7 @@ public sealed class iTween : MonoBehaviour
 	#endregion
 
 	#region Public Helpers
-	
+
 	/// <summary>
 	///  Coroutine for iTween.
 	/// </summary>
@@ -7606,7 +7606,7 @@ public sealed class iTween : MonoBehaviour
 			tweenMethod(target, hashTable);
 		}
 
-		public override bool keepWaiting 
+		public override bool keepWaiting
 		{
 			get { return m_isAnimation; }
 		}
@@ -7655,9 +7655,9 @@ public sealed class iTween : MonoBehaviour
 	public static void moveToUpdateWorld(GameObject target, Hashtable args){Debug.LogError("iTween Error: moveToUpdateWorld() has been deprecated. Please investigate MoveUpdate().");}
 	public static void moveToWorld(GameObject target, Hashtable args){Debug.LogError("iTween Error: moveToWorld() has been deprecated. Please investigate MoveTo().");}
 	public static void punchPosition(GameObject target, Hashtable args){Debug.LogError("iTween Error: punchPosition() has been renamed to PunchPosition().");}
-	public static void punchPositionWorld(GameObject target, Hashtable args){Debug.LogError("iTween Error: punchPositionWorld() has been deprecated. Please investigate PunchPosition().");}	
+	public static void punchPositionWorld(GameObject target, Hashtable args){Debug.LogError("iTween Error: punchPositionWorld() has been deprecated. Please investigate PunchPosition().");}
 	public static void punchRotation(GameObject target, Hashtable args){Debug.LogError("iTween Error: punchPosition() has been renamed to PunchRotation().");}
-	public static void punchRotationWorld(GameObject target, Hashtable args){Debug.LogError("iTween Error: punchRotationWorld() has been deprecated. Please investigate PunchRotation().");}	
+	public static void punchRotationWorld(GameObject target, Hashtable args){Debug.LogError("iTween Error: punchRotationWorld() has been deprecated. Please investigate PunchRotation().");}
 	public static void punchScale(GameObject target, Hashtable args){Debug.LogError("iTween Error: punchScale() has been renamed to PunchScale().");}
 	public static void rotateAdd(GameObject target, Hashtable args){Debug.LogError("iTween Error: rotateAdd() has been renamed to RotateAdd().");}
 	public static void rotateBy(GameObject target, Hashtable args){Debug.LogError("iTween Error: rotateBy() has been renamed to RotateBy().");}

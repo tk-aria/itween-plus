@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace AriaPlugin.Editor.Coroutine
+namespace AriaSDK.Editor.Coroutine
 {
     /*
     /// <summary>

@@ -1,9 +1,9 @@
 {
-    "name": "com.aria.unity.itween-pro",
+    "name": "com.aria.unity.itween-plus",
     "version": "1.0.1",
     "unity": "2019.1",
-    "displayName": "iTweenPro",
-    "description": "explanation",
+    "displayName": "iTween+",
+    "description": "itween library extension.",
     "category": "Unity",
     "keywords": ["Unity", "UI", "Animation", "Tween"],
     "dependencies": {

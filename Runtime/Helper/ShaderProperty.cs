@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AriaPlugin.Runtime.Common
+namespace AriaSDK.Runtime.Common
 {
 	/// <summary>
-	///  
+	///
 	/// </summary>
 	[Serializable]
 	public class ShaderProperty

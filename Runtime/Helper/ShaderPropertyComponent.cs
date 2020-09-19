@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AriaPlugin.Runtime.Common
+namespace AriaSDK.Runtime.Common
 {
 	/// <summary>
 	///  .
@@ -27,7 +27,7 @@ namespace AriaPlugin.Runtime.Common
 		}
 
 		private void Start()
-		{ 
+		{
 			var shader = isGlobal ? renderer_.GetComponent<Material>() : renderer_.material;
 			shaderProp = new ShaderProperty(shader, propertyName);
 		}
