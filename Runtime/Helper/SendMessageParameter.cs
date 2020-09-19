@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AriaPlugin.Runtime.iTweenHelper
+namespace AriaSDK.Runtime.iTweenPro
 {
     /// <summary>
     ///  .

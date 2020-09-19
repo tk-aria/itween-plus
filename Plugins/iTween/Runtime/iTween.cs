@@ -37,6 +37,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using Unity.IL2CPP.CompilerServices;
 #endregion
 
 #if UNITY_2019_1_OR_NEWER
@@ -53,9 +54,10 @@ using Tween_UIText = UnityEngine.GUIText;
 /// <para>Support: http://itween.pixelplacement.com</para>
 /// </summary>
 #if UNITY_EDITOR
-[HelpUrl("http://pixelplacement.com/itween/documentation.php")]
+[HelpURL("http://pixelplacement.com/itween/documentation.php")]
 #endif // UNITY_EDITOR END.
 [Il2CppSetOption(Option.NullChecks, false)]
+[DisallowMultipleComponent]
 public sealed class iTween : MonoBehaviour
 {
 
@@ -6566,7 +6568,10 @@ public sealed class iTween : MonoBehaviour
 		tweenArguments = h;
 	}
 
-	void Awake() {
+	void Awake() => Initialize();
+
+	public void Initialize()
+	{
 		thisTransform = transform;
 
 		RetrieveArgs();
@@ -6574,12 +6579,82 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	IEnumerator Start() {
+		/*
 		if ( delay > 0 ) {
 			yield return StartCoroutine( "TweenDelay" );
 		}
 		TweenStart();
+		*/
+		yield return StartCoroutine(Play());
 	}
 
+	IEnumerator Play()
+	{
+		if ( delay > 0 ) {
+			yield return StartCoroutine( TweenDelay() );
+		}
+		TweenStart();
+
+		Debug.Log("Start");
+
+		if ( !reverse )
+		{
+			Debug.Log("updare not reverse");
+
+			while (percentage < 1f)
+			{
+				Debug.Log("updating");
+				TweenUpdate();
+				yield return null;
+			}
+		}
+		else
+		{
+			Debug.Log("updare reverse");
+
+			while (percentage > 0)
+			{
+				Debug.Log("updating");
+				TweenUpdate();
+				yield return null;
+			}
+		}
+		Debug.Log("Complete");
+	
+		TweenComplete();
+	}
+
+	public void PlayAnimation()
+	{
+		StartCoroutine(Play());
+	}
+
+#if UNITY_EDITOR
+
+		#region Editor
+
+		[UnityEditor.MenuItem("CONTEXT/iTween/[ForTest] Start Animation")]
+		private static void InvokeStartAnimation(UnityEditor.MenuCommand menuCommand)
+		{
+			var component = menuCommand.context as iTween;
+			if (component == null)
+			{
+				return;
+			}
+			component.Initialize();
+			component.PlayAnimation();
+		}
+
+		#endregion // Editor End.
+
+#endif // UNITY_EDITOR END.
+
+	public void SeekDirect(float percentage)
+	{
+		this.percentage = percentage;
+		runningTime = time * percentage;
+	}
+/*
 	//non-physics
 	void Update() {
 		if ( isRunning && !physics ) {
@@ -6617,7 +6692,7 @@ public sealed class iTween : MonoBehaviour
 			}
 		}
 	}
-
+*/
 	void LateUpdate() {
 		//look applications:
 		if ( tweenArguments.Contains( "looktarget" ) && isRunning ) {
@@ -6754,7 +6829,7 @@ public sealed class iTween : MonoBehaviour
 	}
 
 	//catalog new tween and add component phase of iTween:
-	static void Launch( GameObject target, Hashtable args ) {
+	static iTween Launch( GameObject target, Hashtable args ) {
 		if ( !args.Contains( "id" ) ) {
 			args[ "id" ] = GenerateID();
 		}
@@ -6764,7 +6839,7 @@ public sealed class iTween : MonoBehaviour
 		}
 
 		tweens.Insert( 0, args );
-		target.AddComponent<iTween>();
+		return target.AddComponent<iTween>();
 	}
 
 	//cast any accidentally supplied doubles and ints as floats as iTween only uses floats internally and unify parameter case:
@@ -7492,6 +7567,15 @@ public sealed class iTween : MonoBehaviour
 	/// <summary>
 	///  Coroutine for iTween.
 	/// </summary>
+	/// <example>
+	/// <code>
+	///  yield return new iTween.WaitForAnimation(
+    ///    iTween.MoveTo, this.gameObject, iTween.Hash(
+    ///        "x", 0f,
+    ///        "islocal", true,
+    ///        "time", 0.3f));
+	/// </code>
+	/// </example>>
 	public sealed class WaitForAnimation : CustomYieldInstruction
 	{
 		#region Field
@@ -7513,13 +7597,13 @@ public sealed class iTween : MonoBehaviour
 			Action completedAction = () => { m_isAnimation = false;};
 			if (hashTable.ContainsKey("oncomplete"))
 			{
-			 	completedAction = (Action)hashTable["oncomplete"];
+				completedAction = (Action)hashTable["oncomplete"];
 			}
 
 			m_isAnimation = true;
 			hashTable["oncomplete"] = completedAction;
 
-			tweenMethod.SafeInvoke(target, hashTable);
+			tweenMethod(target, hashTable);
 		}
 
 		public override bool keepWaiting 

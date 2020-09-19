@@ -23,11 +23,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventParamMappings {
-		
+public sealed class EventParamMappings
+{
 	public static Dictionary<iTweenEvent.TweenType, Dictionary<string, Type>> mappings = new Dictionary<iTweenEvent.TweenType, Dictionary<string, Type>>();
 	
-	static EventParamMappings() {
+	static EventParamMappings()
+	{
 		// AUDIO FROM
 		mappings.Add(iTweenEvent.TweenType.AudioFrom, new Dictionary<string, Type>());
 		mappings[iTweenEvent.TweenType.AudioFrom]["audiosource"] = typeof(AudioSource);
@@ -736,7 +737,6 @@ public class EventParamMappings {
 		mappings[iTweenEvent.TweenType.Stab]["oncomplete"] = typeof(string);
 		mappings[iTweenEvent.TweenType.Stab]["oncompletetarget"] = typeof(GameObject);
 		mappings[iTweenEvent.TweenType.Stab]["oncompleteparams"] = typeof(string);
-		
-		
 	}
+
 }

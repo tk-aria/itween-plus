@@ -1,18 +1,21 @@
-﻿using System;
+﻿using System.ComponentModel;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace AriaPlugin.Runtime.iTweenHelper
+namespace AriaSDK.Runtime.iTweenPro
 {
 	/// <summary>
-	///  iTweenコンポーネント.
+	///  iTween setting component.
 	/// </summary>
 	#if UNITY_EDITOR
-	[HelpUrl("http://pixelplacement.com/itween/documentation.php")]
+	[HelpURL("http://pixelplacement.com/itween/documentation.php")]
 	#endif // UNITY_EDITOR END.
+	#if USE_IL2CPP
 	[Il2CppSetOption(Option.NullChecks, false)]
+	#endif // USE_IL2CPP END.
 	public abstract class iTweenBehaviourBase : Coroutine.EventObject
 	{
 
@@ -158,6 +161,7 @@ namespace AriaPlugin.Runtime.iTweenHelper
 			{
 				return;
 			}
+			component.Initialize();
 			component.StartAnimation();
 		}
 

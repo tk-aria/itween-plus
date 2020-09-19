@@ -1,19 +1,19 @@
 // Copyright (c) 2009-2012 David Koontz
 // Please direct any bugs/comments/suggestions to david@koontzfamily.org
 //
-// Thanks to Gabriel Gheorghiu (gabison@gmail.com) for his code submission 
+// Thanks to Gabriel Gheorghiu (gabison@gmail.com) for his code submission
 // that lead to the integration with the iTween visual path editor.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 
 using UnityEditor;
 using UnityEngine;
@@ -31,27 +32,60 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Linq;
 
+
 [CustomEditor(typeof(iTweenEvent))]
-public class iTweenEventDataEditor : Editor {
+public class iTweenEventDataEditor : Editor
+{
+
+	List<string> trueFalseOptions = new List<string>() { "True", "False" };
+	Dictionary<string, object> values;
+
+	Dictionary<string, bool> propertiesEnabled = new Dictionary<string, bool>();
+	iTweenEvent.TweenType previousType;
+
+	void OnEnable()
+	{
+		var evt = ((iTweenEvent)target).tweenHash;
+		foreach(var key in EventParamMappings.mappings[evt.type].Keys) {
+			propertiesEnabled[key] = false;
+		}
+		previousType = evt.type;
+	}
+
+	public override void OnInspectorGUI()
+	{
+		var evt = (iTweenEvent)target;
+		//values = evt.Values;
+		//var keys = values.Keys.ToArray();
+
+		base.OnInspectorGUI();
+
+		if (evt.tweenHash)
+		{
+			iTweenHashObjectEditor.OnRenderElement(evt.tweenHash, trueFalseOptions, values, propertiesEnabled, ref previousType);
+		}
+	}
+
+	/*
 	List<string> trueFalseOptions = new List<string>() {"True", "False"};
 	Dictionary<string, object> values;
 	Dictionary<string, bool> propertiesEnabled = new Dictionary<string, bool>();
 	iTweenEvent.TweenType previousType;
-	
+
 	[MenuItem("Component/iTween/iTweenEvent")]
     static void AddiTweenEvent () {
 		if(Selection.activeGameObject != null) {
 			Selection.activeGameObject.AddComponent(typeof(iTweenEvent));
 		}
     }
-	
+
 	[MenuItem("Component/iTween/Prepare Visual Editor for Javascript Usage")]
 	static void CopyFilesForJavascriptUsage() {
 		if(Directory.Exists(Application.dataPath + "/iTweenEditor/Helper Classes")) {
 			if(!Directory.Exists(Application.dataPath + "/Plugins")) {
 				Directory.CreateDirectory(Application.dataPath + "/Plugins");
 			}
-			
+
 			if(!Directory.Exists(Application.dataPath + "/Plugins/iTweenEditor")) {
 				Directory.CreateDirectory(Application.dataPath + "/Plugins/iTweenEditor");
 			}
@@ -59,45 +93,44 @@ public class iTweenEventDataEditor : Editor {
 			FileUtil.MoveFileOrDirectory(Application.dataPath + "/iTweenEditor/iTweenEvent.cs", Application.dataPath + "/Plugins/iTweenEvent.cs");
 			FileUtil.MoveFileOrDirectory(Application.dataPath + "/iTweenEditor/iTween.cs", Application.dataPath + "/Plugins/iTween.cs");
 			FileUtil.MoveFileOrDirectory(Application.dataPath + "/iTweenEditor/iTweenPath.cs", Application.dataPath + "/Plugins/iTweenPath.cs");
-			
+
 			AssetDatabase.Refresh();
 		}
 		else {
 			EditorUtility.DisplayDialog("Can't move files", "Your files have already been moved", "Ok");
 		}
 	}
-	
+
 	[MenuItem("Component/iTween/Donate to support the Visual Editor")]
 	static void Donate() {
 		Application.OpenURL("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WD3GQ6HHD257C");
 	}
-	
+
 	public void OnEnable() {
 		var evt = (iTweenEvent)target;
 		foreach(var key in EventParamMappings.mappings[evt.type].Keys) {
 			propertiesEnabled[key] = false;
 		}
 		previousType = evt.type;
-		/*
-		if(!Directory.Exists(Application.dataPath + "/Gizmos")) {
-			Directory.CreateDirectory(Application.dataPath + "/Gizmos");
-		}
-		if(!File.Exists(Application.dataPath + "/Gizmos/iTweenIcon.tif")) {
-			FileUtil.CopyFileOrDirectory(Application.dataPath + "/iTweenEditor/Gizmos/iTweenIcon.tif", Application.dataPath + "/Gizmos/iTweenIcon.tif");
-		}
-		*/
+
+		//if(!Directory.Exists(Application.dataPath + "/Gizmos")) {
+		//	Directory.CreateDirectory(Application.dataPath + "/Gizmos");
+		//}
+		//if(!File.Exists(Application.dataPath + "/Gizmos/iTweenIcon.tif")) {
+		//	FileUtil.CopyFileOrDirectory(Application.dataPath + "/iTweenEditor/Gizmos/iTweenIcon.tif", Application.dataPath + "/Gizmos/iTweenIcon.tif");
+		//}
 	}
-	
+
 	public override void OnInspectorGUI() {
 		var evt = (iTweenEvent)target;
 		values = evt.Values;
 		var keys = values.Keys.ToArray();
-		
+
 		foreach(var key in keys) {
 			propertiesEnabled[key] = true;
 			if(typeof(Vector3OrTransform) == EventParamMappings.mappings[evt.type][key]) {
 				var val = new Vector3OrTransform();
-				
+
 				if(null == values[key] || typeof(Transform) == values[key].GetType()) {
 					if(null == values[key]) {
 						val.transform = null;
@@ -111,12 +144,12 @@ public class iTweenEventDataEditor : Editor {
 					val.vector = (Vector3)values[key];
 					val.selected = Vector3OrTransform.vector3Selected;
 				}
-				
+
 				values[key] = val;
 			}
 			if(typeof(Vector3OrTransformArray) == EventParamMappings.mappings[evt.type][key]) {
 				var val = new Vector3OrTransformArray();
-				
+
 				if(null == values[key] || typeof(Transform[]) == values[key].GetType()) {
 					if(null == values[key]) {
 						val.transformArray = null;
@@ -134,39 +167,41 @@ public class iTweenEventDataEditor : Editor {
 					val.pathName = (string)values[key];
 					val.selected = Vector3OrTransformArray.iTweenPathSelected;
 				}
-				
+
 				values[key] = val;
 			}
 		}
-		
+
+		evt.tweenHash = (iTweenHashParam)EditorGUILayout.ObjectField(evt.tweenHash, typeof(iTweenHashParam), true);
+
 		GUILayout.Label(string.Format("iTween Event Editor v{0}", iTweenEvent.VERSION));
 		EditorGUILayout.Separator();
- 		
+
 		GUILayout.BeginHorizontal();
 			GUILayout.Label("Name");
 			evt.tweenName = EditorGUILayout.TextField(evt.tweenName);
 		GUILayout.EndHorizontal();
-		
+
 		GUILayout.BeginHorizontal();
 			evt.showIconInInspector = GUILayout.Toggle(evt.showIconInInspector, " Show Icon In Scene");
 		GUILayout.EndHorizontal();
-		
+
 		GUILayout.BeginHorizontal();
 			evt.playAutomatically = GUILayout.Toggle(evt.playAutomatically, " Play Automatically");
 		GUILayout.EndHorizontal();
-		
+
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("Initial Start Delay (delay begins once the iTweenEvent is played)");
 		evt.delay = EditorGUILayout.FloatField(evt.delay);
 		GUILayout.EndHorizontal();
-		
+
 		EditorGUILayout.Separator();
-		
+
 		GUILayout.BeginHorizontal();
 			GUILayout.Label("Event Type");
 			evt.type = (iTweenEvent.TweenType)EditorGUILayout.EnumPopup(evt.type);
 		GUILayout.EndHorizontal();
-		
+
 		if(evt.type != previousType) {
 			foreach(var key in EventParamMappings.mappings[evt.type].Keys) {
 				propertiesEnabled[key] = false;
@@ -175,18 +210,18 @@ public class iTweenEventDataEditor : Editor {
 			previousType = evt.type;
 			return;
 		}
-		
+
 		var properties = EventParamMappings.mappings[evt.type];
 		foreach(var pair in properties) {
 			var key = pair.Key;
-			
+
 			GUILayout.BeginHorizontal();
-			
+
 			if(EditorGUILayout.BeginToggleGroup(key, propertiesEnabled[key])) {
 				propertiesEnabled[key] = true;
-				
+
 				GUILayout.BeginVertical();
-			
+
 				if(typeof(string) == pair.Value) {
 					values[key] = EditorGUILayout.TextField(values.ContainsKey(key) ? (string)values[key] : "");
 				}
@@ -199,7 +234,7 @@ public class iTweenEventDataEditor : Editor {
 				else if(typeof(bool) == pair.Value) {
 					GUILayout.BeginHorizontal();
 					var currentValueString = (values.ContainsKey(key) ? (bool)values[key] : false).ToString();
-					currentValueString = currentValueString.Substring(0, 1).ToUpper() + currentValueString.Substring(1);					
+					currentValueString = currentValueString.Substring(0, 1).ToUpper() + currentValueString.Substring(1);
 					var index = EditorGUILayout.Popup(trueFalseOptions.IndexOf(currentValueString), trueFalseOptions.ToArray());
 					GUILayout.EndHorizontal();
 					values[key] = bool.Parse(trueFalseOptions[index]);
@@ -215,9 +250,9 @@ public class iTweenEventDataEditor : Editor {
 						values[key] = new Vector3OrTransform();
 					}
 					var val = (Vector3OrTransform)values[key];
-					
+
 					val.selected = GUILayout.SelectionGrid(val.selected, Vector3OrTransform.choices, 2);
-	
+
 					if(Vector3OrTransform.vector3Selected == val.selected) {
 						val.vector = EditorGUILayout.Vector3Field("", val.vector);
 					}
@@ -282,8 +317,8 @@ public class iTweenEventDataEditor : Editor {
 									index = i;
 								}
 							}
-							index = EditorGUILayout.Popup(index, (GameObject.FindObjectsOfType(typeof(iTweenPath)) as iTweenPath[]).Select(path => path.pathName).ToArray());	
-							
+							index = EditorGUILayout.Popup(index, (GameObject.FindObjectsOfType(typeof(iTweenPath)) as iTweenPath[]).Select(path => path.pathName).ToArray());
+
 							val.pathName = paths[index].pathName;
 						}
 					}
@@ -307,21 +342,21 @@ public class iTweenEventDataEditor : Editor {
 				else if(typeof(Space) == pair.Value) {
 					values[key] = EditorGUILayout.EnumPopup(values.ContainsKey(key) ? (Space)values[key] : Space.Self);
 				}
-				
+
 				GUILayout.EndVertical();
 			}
 			else {
 				propertiesEnabled[key] = false;
 				values.Remove(key);
 			}
-			
+
 			EditorGUILayout.EndToggleGroup();
 			GUILayout.EndHorizontal();
 			EditorGUILayout.Separator();
 		}
-		
+
 		keys = values.Keys.ToArray();
-		
+
 		foreach(var key in keys) {
 			if(values[key] != null && values[key].GetType() == typeof(Vector3OrTransform)) {
 				var val = (Vector3OrTransform)values[key];
@@ -345,8 +380,9 @@ public class iTweenEventDataEditor : Editor {
 				}
 			}
 		}
-		
+
 		evt.Values = values;
 		previousType = evt.type;
 	}
+	*/
 }

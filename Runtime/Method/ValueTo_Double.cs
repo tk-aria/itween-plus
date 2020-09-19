@@ -1,5 +1,5 @@
 ﻿
-namespace AriaPlugin.Runtime.iTweenHelper
+namespace AriaSDK.Runtime.iTweenPro
 {
 	public sealed class ValueTo_Double : ValueTo<double> 
 	{

@@ -21,7 +21,8 @@
 
 using UnityEngine;
 
-public class Vector3OrTransformArray {
+public sealed class Vector3OrTransformArray
+{
 	public static readonly string[] choices = {"Vector3", "Transform", "Path"};
 	public static readonly int vector3Selected = 0;
 	public static readonly int transformSelected = 1;

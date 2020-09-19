@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18dff60cbb1f547a0a3198ca8a7c05c5, type: 3}
+  m_Name: New I Tween Hash Object 1
+  m_EditorClassIdentifier: 
+  type: 17
+  keys:
+  - position
+  - path
+  indexes: 0000000000000000
+  metadatas:
+  - v
+  - v
+  ints: 
+  floats: []
+  bools: 
+  strings: []
+  vector3s:
+  - {x: 0, y: 0, z: 0}
+  colors: []
+  spaces: 
+  easeTypes: 
+  loopTypes: 
+  gameObjects: []
+  transforms: []
+  audioClips: []
+  audioSources: []
+  vector3Arrays:
+  - indexes: 
+  transformArrays: []
+  paths: []

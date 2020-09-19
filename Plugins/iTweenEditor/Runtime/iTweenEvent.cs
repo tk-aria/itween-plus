@@ -1,16 +1,16 @@
 // Copyright (c) 2009-2012 David Koontz
 // Please direct any bugs/comments/suggestions to david@koontzfamily.org
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,20 +19,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
-[System.Serializable]
-public class ArrayIndexes {
+[Serializable]
+public class ArrayIndexes
+{
 	public int[] indexes;
 }
 
-public class iTweenEvent : MonoBehaviour{
+public sealed class iTweenEvent : MonoBehaviour
+{
 	public const string VERSION = "0.6.1";
-	
-	public enum TweenType {
+
+	public enum TweenType
+	{
 		AudioFrom,
 		AudioTo,
 		AudioUpdate,
@@ -71,13 +75,15 @@ public class iTweenEvent : MonoBehaviour{
 		Stab
 		//ValueTo
 	}
-	
+
 	public string tweenName = "";
 	public bool playAutomatically = true;
 	public float delay = 0;
-	public iTweenEvent.TweenType type = iTweenEvent.TweenType.MoveTo;
+	//public iTweenEvent.TweenType type = iTweenEvent.TweenType.MoveTo;
 	public bool showIconInInspector = true;
-	
+	[SerializeField] public iTweenHashObject tweenHash = null;
+
+
 	/// <summary>
 	/// Finds an iTweenEvent on a GameObject
 	/// </summary>
@@ -98,12 +104,38 @@ public class iTweenEvent : MonoBehaviour{
 				return result;
 			}
 		}
-		
+
 		throw new System.ArgumentException("No tween with the name '" + name + "' could be found on the GameObject named '" + obj.name + "'");
 	}
-	
+
+	/// <summary>
+	///
+	/// </summary>
+	public sealed class WaitForAnimation : CustomYieldInstruction
+	{
+		iTweenEvent tweenEvent = null;
+
+		/// <summary>
+		///
+		/// </summary>
+		/// <param name="target"></param>
+		/// <param name="hash"></param>
+		public WaitForAnimation(GameObject target, iTweenHashObject hash)
+		{
+			tweenEvent = target.GetComponent<iTweenEvent>() ?? target.AddComponent<iTweenEvent>();
+			tweenEvent.tweenHash = hash;
+			tweenEvent.Play();
+		}
+
+		public override bool keepWaiting
+		{
+			get { return !tweenEvent.stopped; }
+		}
+	}
+
+	/*
 	public Dictionary<string, object> Values {
-		get { 
+		get {
 			if(null == values) {
 				DeserializeValues();
 			}
@@ -114,80 +146,84 @@ public class iTweenEvent : MonoBehaviour{
 			SerializeValues();
 		}
 	}
+	*/
 
+	/*
 	[SerializeField]
 	string[] keys;
-	
+
 	[SerializeField]
  	int[] indexes;
-	
+
 	[SerializeField]
 	string[] metadatas;
-	
+
 	[SerializeField]
 	int[] ints;
-	
+
 	[SerializeField]
 	float[] floats;
-	
+
 	[SerializeField]
 	bool[] bools;
-	
+
 	[SerializeField]
 	string[] strings;
-	
+
 	[SerializeField]
 	Vector3[] vector3s;
-	
+
 	[SerializeField]
 	Color[] colors;
-		
+
 	[SerializeField]
 	Space[] spaces;
-	
+
 	[SerializeField]
 	iTween.EaseType[] easeTypes;
-	
+
 	[SerializeField]
 	iTween.LoopType[] loopTypes;
-	
+
 	[SerializeField]
 	GameObject[] gameObjects;
-	
+
 	[SerializeField]
 	Transform[] transforms;
 
 	[SerializeField]
 	AudioClip[] audioClips;
-	
+
 	[SerializeField]
 	AudioSource[] audioSources;
-	
+
 	[SerializeField]
 	ArrayIndexes[] vector3Arrays;
-	
+
 	[SerializeField]
 	ArrayIndexes[] transformArrays;
-	
+
 	[SerializeField]
 	iTweenPath[] paths;
-	
-	Dictionary<string, object> values;
-	bool stopped;
+	*/
+
+	//Dictionary<string, object> values;
+
+	[NonSerialized] public bool stopped;
 	iTween instantiatedTween;
 	string internalName;
-	
-	public void Start() {
+
+	private void Start() {
 		if(playAutomatically) Play();
 	}
-	
+
 	public void Play() {
 		if(!string.IsNullOrEmpty(internalName)) Stop();
-		
+
 		stopped = false;
 		StartCoroutine(StartEvent());
 	}
-	
+
 	/// <summary>
 	/// Stops the currently running tween that was started with <seealso cref="Play"/>.  A tween
 	/// stopped in this manner will not go to the "end" of the tween.
@@ -197,146 +233,166 @@ public class iTweenEvent : MonoBehaviour{
 		internalName = "";
 		stopped = true;
 	}
-	
+
 	public void OnDrawGizmos() {
 		if(showIconInInspector) Gizmos.DrawIcon(transform.position, "iTweenIcon.tif");
 	}
-	
+
 	IEnumerator StartEvent() {
 		if(delay > 0) yield return new WaitForSeconds(delay);
-		
+
 		if(stopped) yield return null;
-		
+
+		var optionsHash = tweenHash.ToHashtable();
+		/*
 		var optionsHash = new Hashtable();
-		foreach(var pair in Values) {
+		//foreach(var pair in Values) {
+		foreach(var pair in tweenHash.Values) {
 			if("path" == pair.Key && pair.Value.GetType() == typeof(string)) optionsHash.Add(pair.Key, iTweenPath.GetPath((string)pair.Value));
 			else optionsHash.Add(pair.Key, pair.Value);
 		}
-		
+		*/
+
 		// We use the internalName to have a unique identifier to stop the tween
 		internalName = string.IsNullOrEmpty(tweenName) ? string.Empty : tweenName;
 		internalName = string.Format("{0}-{1}", internalName, System.Guid.NewGuid().ToString());
 		optionsHash.Add("name", internalName);
-		
+
+		GetMethod(tweenHash.type)(gameObject, optionsHash);
+	}
+
+	public static Action<GameObject, Hashtable> GetMethod(TweenType type)
+	//, GameObject target, Hashtable hashtable)
+	{
+		Action<GameObject, Hashtable> tweenAction = null;
+
 		switch(type) {
 		case TweenType.AudioFrom:
-			iTween.AudioFrom(gameObject, optionsHash);
+			tweenAction = iTween.AudioFrom;
 			break;
 		case TweenType.AudioTo:
-			iTween.AudioTo(gameObject, optionsHash);
+			tweenAction = iTween.AudioTo;//(target, hashtable);
 			break;
 		case TweenType.AudioUpdate:
-			iTween.AudioUpdate(gameObject, optionsHash);
+			tweenAction = iTween.AudioUpdate;//(target, hashtable);
 			break;
+
+		// obsolete?
 		case TweenType.CameraFadeFrom:
-			iTween.CameraFadeFrom(optionsHash);
+			tweenAction = (GameObject target, Hashtable hash) => { iTween.CameraFadeFrom(hash); };//(hashtable);
 			break;
+
+		// obsolete?
 		case TweenType.CameraFadeTo:
-			iTween.CameraFadeTo(optionsHash);
+			tweenAction = (GameObject target, Hashtable hash) => { iTween.CameraFadeTo(hash); };//(hashtable);
 			break;
+
 		case TweenType.ColorFrom:
-			iTween.ColorFrom(gameObject, optionsHash);
+			tweenAction = iTween.ColorFrom;//(target, hashtable);
 			break;
 		case TweenType.ColorTo:
-			iTween.ColorTo(gameObject, optionsHash);
+			tweenAction = iTween.ColorTo;//(target, hashtable);
 			break;
 		case TweenType.ColorUpdate:
-			iTween.ColorUpdate(gameObject, optionsHash);
+			tweenAction = iTween.ColorUpdate;//(target, hashtable);
 			break;
 		case TweenType.FadeFrom:
-			iTween.FadeFrom(gameObject, optionsHash);
+			tweenAction = iTween.FadeFrom;//(target, hashtable);
 			break;
 		case TweenType.FadeTo:
-			iTween.FadeTo(gameObject, optionsHash);
+			tweenAction = iTween.FadeTo;//(target, hashtable);
 			break;
 		case TweenType.FadeUpdate:
-			iTween.FadeUpdate(gameObject, optionsHash);
+			tweenAction = iTween.FadeUpdate;//(target, hashtable);
 			break;
 		case TweenType.LookFrom:
-			iTween.LookFrom(gameObject, optionsHash);
+			tweenAction = iTween.LookFrom;//(target, hashtable);
 			break;
 		case TweenType.LookTo:
-			iTween.LookTo(gameObject, optionsHash);
+			tweenAction = iTween.LookTo;//(target, hashtable);
 			break;
 		case TweenType.LookUpdate:
-			iTween.LookUpdate(gameObject, optionsHash);
+			tweenAction = iTween.LookUpdate;//(target, hashtable);
 			break;
 		case TweenType.MoveAdd:
-			iTween.MoveAdd(gameObject, optionsHash);
+			tweenAction = iTween.MoveAdd;//(target, hashtable);
 			break;
 		case TweenType.MoveBy:
-			iTween.MoveBy(gameObject, optionsHash);
+			tweenAction = iTween.MoveBy;//(target, hashtable);
 			break;
 		case TweenType.MoveFrom:
-			iTween.MoveFrom(gameObject, optionsHash);
+			tweenAction = iTween.MoveFrom;//(target, hashtable);
 			break;
 		case TweenType.MoveTo:
-			iTween.MoveTo(gameObject, optionsHash);
+			tweenAction = iTween.MoveTo;//(target, hashtable);
 			break;
 		case TweenType.MoveUpdate:
-			iTween.MoveUpdate(gameObject, optionsHash);
+			tweenAction = iTween.MoveUpdate;//(target, hashtable);
 			break;
 		case TweenType.PunchPosition:
-			iTween.PunchPosition(gameObject, optionsHash);
+			tweenAction = iTween.PunchPosition;//(target, hashtable);
 			break;
 		case TweenType.PunchRotation:
-			iTween.PunchRotation(gameObject, optionsHash);
+			tweenAction = iTween.PunchRotation;//(target, hashtable);
 			break;
 		case TweenType.PunchScale:
-			iTween.PunchScale(gameObject, optionsHash);
+			tweenAction = iTween.PunchScale;//(target, hashtable);
 			break;
 		case TweenType.RotateAdd:
-			iTween.RotateAdd(gameObject, optionsHash);
+			tweenAction = iTween.RotateAdd;//(target, hashtable);
 			break;
 		case TweenType.RotateBy:
-			iTween.RotateBy(gameObject, optionsHash);
+			tweenAction = iTween.RotateBy;//(target, hashtable);
 			break;
 		case TweenType.RotateFrom:
-			iTween.RotateFrom(gameObject, optionsHash);
+			tweenAction = iTween.RotateFrom;//(target, hashtable);
 			break;
 		case TweenType.RotateTo:
-			iTween.RotateTo(gameObject, optionsHash);
+			tweenAction = iTween.RotateTo;//(target, hashtable);
 			break;
 		case TweenType.RotateUpdate:
-			iTween.RotateUpdate(gameObject, optionsHash);
+			tweenAction = iTween.RotateUpdate;//(target, hashtable);
 			break;
 		case TweenType.ScaleAdd:
-			iTween.ScaleAdd(gameObject, optionsHash);
+			tweenAction = iTween.ScaleAdd;//(target, hashtable);
 			break;
 		case TweenType.ScaleBy:
-			iTween.ScaleBy(gameObject, optionsHash);
+			tweenAction = iTween.ScaleBy;//(target, hashtable);
 			break;
 		case TweenType.ScaleFrom:
-			iTween.ScaleFrom(gameObject, optionsHash);
+			tweenAction = iTween.ScaleFrom;//(target, hashtable);
 			break;
 		case TweenType.ScaleTo:
-			iTween.ScaleTo(gameObject, optionsHash);
+			tweenAction = iTween.ScaleTo;//(target, hashtable);
 			break;
 		case TweenType.ScaleUpdate:
-			iTween.ScaleUpdate(gameObject, optionsHash);
+			tweenAction = iTween.ScaleUpdate;//(target, hashtable);
 			break;
 		case TweenType.ShakePosition:
-			iTween.ShakePosition(gameObject, optionsHash);
+			tweenAction = iTween.ShakePosition;//(target, hashtable);
 			break;
 		case TweenType.ShakeRotation:
-			iTween.ShakeRotation(gameObject, optionsHash);
+			tweenAction = iTween.ShakeRotation;//(target, hashtable);
 			break;
 		case TweenType.ShakeScale:
-			iTween.ShakeScale(gameObject, optionsHash);
+			tweenAction = iTween.ShakeScale;//(target, hashtable);
 			break;
 		case TweenType.Stab:
-			iTween.Stab(gameObject, optionsHash);
+			tweenAction = iTween.Stab;//(target, hashtable);
 			break;
 		default:
 			throw new System.ArgumentException("Invalid tween type: " + type);
 		}
+
+		return tweenAction;
 	}
-	
+
+	/*
 	void SerializeValues() {
 		var keyList = new List<string>();
 		var indexList = new List<int>();
 		var metadataList = new List<string>();
-		
+
 		var intList = new List<int>();
 		var floatList = new List<float>();
 		var boolList = new List<bool>();
@@ -352,7 +408,7 @@ public class iTweenEvent : MonoBehaviour{
 		var audioSourceList = new List<AudioSource>();
 		var vector3ArrayList = new List<ArrayIndexes>();
 		var transformArrayList = new List<ArrayIndexes>();
-			
+
 		foreach(var pair in values) {
 			var mappings = EventParamMappings.mappings[type];
 			var valueType = mappings[pair.Key];
@@ -412,7 +468,7 @@ public class iTweenEvent : MonoBehaviour{
 						vector3List.Add((Vector3)value[i]);
 						indexArray[i] = vector3List.Count - 1;
 					}
-					
+
 					vectorIndexes.indexes = indexArray;
 					AddToList<ArrayIndexes>(keyList, indexList, vector3ArrayList, metadataList, pair.Key, vectorIndexes, "v");
 				}
@@ -424,7 +480,7 @@ public class iTweenEvent : MonoBehaviour{
 						transformList.Add((Transform)value[i]);
 						indexArray[i] = transformList.Count - 1;
 					}
-					
+
 					transformIndexes.indexes = indexArray;
 					AddToList<ArrayIndexes>(keyList, indexList, transformArrayList, metadataList, pair.Key, transformIndexes, "t");
 				}
@@ -434,7 +490,7 @@ public class iTweenEvent : MonoBehaviour{
 				}
 			}
 		}
-		
+
 		keys = keyList.ToArray();
 		indexes = indexList.ToArray();
 		metadatas = metadataList.ToArray();
@@ -454,37 +510,37 @@ public class iTweenEvent : MonoBehaviour{
 		vector3Arrays = vector3ArrayList.ToArray();
 		transformArrays = transformArrayList.ToArray();
 	}
-	
+
 	void AddToList<T>(List<string> keyList, List<int> indexList, IList<T> valueList, List<string> metadataList, KeyValuePair<string, object> pair) {
 		AddToList<T>(keyList, indexList, valueList, metadataList, pair.Key, pair.Value);
 	}
-	
+
 	void AddToList<T>(List<string> keyList, List<int> indexList, IList<T> valueList, List<string> metadataList, KeyValuePair<string, object> pair, string metadata) {
 		AddToList<T>(keyList, indexList, valueList, metadataList, pair.Key, pair.Value, metadata);
 	}
-	
+
 	void AddToList<T>(List<string> keyList, List<int> indexList, IList<T> valueList, List<string> metadataList, string key, object value) {
 		AddToList<T>(keyList, indexList, valueList, metadataList, key, value, null);
 	}
-	
+
 	void AddToList<T>(List<string> keyList, List<int> indexList, IList<T> valueList, List<string> metadataList, string key, object value, string metadata) {
 		keyList.Add(key);
 		valueList.Add((T)value);
 		indexList.Add(valueList.Count - 1);
 		metadataList.Add(metadata);
 	}
-	
+
 	void DeserializeValues() {
 		values = new Dictionary<string, object>();
-		
+
 		if(null == keys) {
 			return;
 		}
-		
+
 		for(var i = 0; i < keys.Length; ++i) {
 			var mappings = EventParamMappings.mappings[type];
 			var valueType = mappings[keys[i]];
-			
+
 			if(typeof(int) == valueType) {
 				values.Add(keys[i], ints[indexes[i]]);
 			}
@@ -539,7 +595,7 @@ public class iTweenEvent : MonoBehaviour{
 					for(var idx = 0; idx < arrayIndexes.indexes.Length; ++idx) {
 						vectorArray[idx] = vector3s[arrayIndexes.indexes[idx]];
 					}
-					
+
 					values.Add(keys[i], vectorArray);
 				}
 				else if("t" == metadatas[i]) {
@@ -548,7 +604,7 @@ public class iTweenEvent : MonoBehaviour{
 					for(var idx = 0; idx < arrayIndexes.indexes.Length; ++idx) {
 						transformArray[idx] = transforms[arrayIndexes.indexes[idx]];
 					}
-					
+
 					values.Add(keys[i], transformArray);
 				}
 				else if("p" == metadatas[i]) {
@@ -556,5 +612,5 @@ public class iTweenEvent : MonoBehaviour{
 				}
 			}
 		}
-	}
+	}*/
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace AriaPlugin.Runtime.Coroutine
+namespace AriaSDK.Runtime.Coroutine
 {
 
 	/// <summary>

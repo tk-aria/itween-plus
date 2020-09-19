@@ -1,11 +1,11 @@
 {
-    "name": "com.aria.unity.itween",
-    "version": "1.0.0",
+    "name": "com.aria.unity.itween-pro",
+    "version": "1.0.1",
     "unity": "2019.1",
-    "displayName": "iTweenHelper",
+    "displayName": "iTweenPro",
     "description": "explanation",
-    "category": "UI",
-    "keywords": ["UI", "Animation", "Tween"],
+    "category": "Unity",
+    "keywords": ["Unity", "UI", "Animation", "Tween"],
     "dependencies": {
     },
     "samples": [

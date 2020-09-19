@@ -1,0 +1,15 @@
+{
+    "name": "iTweenEditor",
+    "references": [
+        "GUID:74b07812e0b35497cac98ddd01cddad4"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

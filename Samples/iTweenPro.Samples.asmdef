@@ -1,7 +1,9 @@
 {
-    "name": "AriaPlugin.Runtime.iTweenHelper",
+    "name": "iTweenPro.Samples",
     "references": [
-        "iTween"
+        "GUID:74b07812e0b35497cac98ddd01cddad4",
+        "GUID:53fe358ec15834bcebd90c5a143a96c4",
+        "GUID:f0e82928eff3146d5b505018b54049fc"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
@@ -9,7 +11,7 @@
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": true,
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": []
 }

@@ -13,3 +13,8 @@ how to install
 
 ## License
 - MIT License (iTweenHelper) + iTween(http://pixelplacement.com/itween/gettingstarted.php)
+
+
+- feature
+  - support timeline editor (already support runtime)
+  - manualy update

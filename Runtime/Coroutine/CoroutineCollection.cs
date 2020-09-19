@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AriaPlugin.Runtime.Coroutine
+namespace AriaSDK.Runtime.Coroutine
 {
 
 	public class WaitForAnimation : CustomYieldInstruction
