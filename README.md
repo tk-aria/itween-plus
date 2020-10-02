@@ -1,4 +1,4 @@
-# iTweenPackage
+# itween+
 
 ## Install
 support unity package manager.
