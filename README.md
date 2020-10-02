@@ -1,7 +1,7 @@
 <!-- # itween+ -->
 
 <p align="center">
-    <h1 align="center">GaS4QL</h1>
+    <h1 align="center">itween+</h1>
 </p>
 
 ## Install
